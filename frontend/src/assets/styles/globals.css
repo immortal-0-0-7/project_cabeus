@@ -1,0 +1,184 @@
+@import 'tailwindcss';
+
+@theme {
+  /* ── Space palette ── */
+  --color-space-void: #02040a;
+  --color-space-deep: #050814;
+  --color-space-panel: #0a0f1e;
+  --color-space-elevated: #111827;
+
+  /* ── Brand accents ── */
+  --color-ice: #67d8ff;
+  --color-ice-dim: #3eb8e8;
+  --color-mission: #4d8cff;
+  --color-cinematic: #6e5dff;
+  --color-signal: #34d399;
+  --color-warning: #fbbf24;
+  --color-danger: #f87171;
+
+  /* ── Text ── */
+  --color-text-primary: #f4f7fa;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+
+  /* ── Borders & surfaces ── */
+  --color-border-subtle: rgb(255 255 255 / 0.06);
+  --color-border-default: rgb(255 255 255 / 0.1);
+  --color-border-strong: rgb(255 255 255 / 0.16);
+  --color-glass: rgb(10 15 30 / 0.72);
+  --color-glass-strong: rgb(10 15 30 / 0.88);
+
+  /* ── Typography ── */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Syne', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* ── Spacing scale extensions ── */
+  --spacing-sidebar: 17.5rem;
+  --spacing-sidebar-collapsed: 4.5rem;
+  --spacing-topbar: 3.75rem;
+  --spacing-insights-panel: 22rem;
+  --spacing-bottom-dock: 11.5rem;
+  --spacing-bottom-dock-mobile: 10rem;
+
+  /* ── ISRO accent ── */
+  --color-isro-saffron: #ff9933;
+  --color-isro-green: #138808;
+
+  /* ── Shadows & glows ── */
+  --shadow-glow-ice: 0 0 24px rgb(103 216 255 / 0.25);
+  --shadow-glow-mission: 0 0 32px rgb(77 140 255 / 0.2);
+  --shadow-panel: 0 8px 32px rgb(0 0 0 / 0.45);
+
+  /* ── Animation ── */
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Radius ── */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.125rem;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    color-scheme: dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    background-color: var(--color-space-void);
+    color: var(--color-text-primary);
+    overflow-x: hidden;
+  }
+
+  #root {
+    min-height: 100dvh;
+    isolation: isolate;
+  }
+
+  ::selection {
+    background-color: rgb(103 216 255 / 0.25);
+    color: var(--color-text-primary);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ice);
+    outline-offset: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(255 255 255 / 0.12);
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(255 255 255 / 0.2);
+  }
+}
+
+@layer utilities {
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .glass {
+    background: var(--color-glass);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid var(--color-border-default);
+  }
+
+  .glass-strong {
+    background: var(--color-glass-strong);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid var(--color-border-strong);
+  }
+
+  .text-gradient-ice {
+    background: linear-gradient(135deg, var(--color-ice) 0%, var(--color-mission) 50%, var(--color-cinematic) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glow-ice {
+    box-shadow: var(--shadow-glow-ice);
+  }
+
+  .glow-mission {
+    box-shadow: var(--shadow-glow-mission);
+  }
+
+  .noise-overlay {
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 128px 128px;
+  }
+
+  .grid-mission {
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
