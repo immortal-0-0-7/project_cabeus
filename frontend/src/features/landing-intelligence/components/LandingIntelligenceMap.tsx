@@ -23,12 +23,14 @@ export interface LandingIntelligenceMapProps {
   candidates: LandingCandidate[];
   selectedId: string;
   onSelect: (id: string) => void;
+  explainPanelOpen?: boolean;
 }
 
 export function LandingIntelligenceMap({
   candidates,
   selectedId,
   onSelect,
+  explainPanelOpen = false,
 }: LandingIntelligenceMapProps) {
   const reducedMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -254,7 +256,9 @@ export function LandingIntelligenceMap({
         {/* HUD overlays */}
         <div className="pointer-events-none absolute left-3 top-3 flex items-center gap-1.5 rounded-md border border-border-subtle bg-space-panel/85 px-2 py-1 backdrop-blur-sm">
           <Crosshair className="size-3 text-ice" />
-          <span className="font-mono text-[9px] text-text-secondary">DFSAR L-BAND · DRAG TO PAN</span>
+          <span className="font-mono text-[9px] text-text-secondary">
+            {explainPanelOpen ? 'XAI PANEL ACTIVE · CLICK HOTSPOT' : 'DFSAR L-BAND · DRAG TO PAN'}
+          </span>
         </div>
 
         <div className="pointer-events-none absolute bottom-3 left-3 flex gap-1.5">
@@ -273,7 +277,7 @@ export function LandingIntelligenceMap({
         </div>
 
         <AnimatePresence mode="wait">
-          {(hovered ?? selected) && (
+          {(hovered ?? selected) && !explainPanelOpen && (
             <motion.div
               key={(hovered ?? selected).id}
               initial={{ opacity: 0, y: 6 }}

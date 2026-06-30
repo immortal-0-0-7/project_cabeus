@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Radar } from 'lucide-react';
 import { Badge } from '@/components/common/Badge';
 import { GlassPanel } from '@/components/common/GlassPanel';
+import { ExplainabilityPanel, useExplainability } from '@/features/explainability';
 import {
   LandingCandidatesPanel,
   LandingIntelligenceMap,
@@ -13,11 +14,25 @@ import { fadeUp, staggerContainer } from '@/utils/motion';
 export function LandingIntelligenceWorkspace() {
   const {
     candidates,
+    selected,
     selectedId,
     isGenerating,
     selectCandidate,
     regenerate,
   } = useLandingIntelligence();
+
+  const {
+    isOpen: explainOpen,
+    isAnalyzing,
+    explainability,
+    open: openExplainability,
+    close: closeExplainability,
+  } = useExplainability(selected);
+
+  const handleHotspotSelect = (id: string) => {
+    selectCandidate(id);
+    openExplainability();
+  };
 
   return (
     <motion.div
@@ -49,14 +64,24 @@ export function LandingIntelligenceWorkspace() {
       <LandingSummaryStrip candidates={candidates} isGenerating={isGenerating} />
 
       <div className="grid min-h-0 flex-1 gap-4 xl:grid-cols-[1fr_420px]">
-        <motion.div variants={fadeUp} className="min-h-[360px]">
+        <motion.div variants={fadeUp} className="relative min-h-[360px]">
           <GlassPanel animate={false} className="flex h-full flex-col p-4">
             {!isGenerating && candidates.length > 0 ? (
-              <LandingIntelligenceMap
-                candidates={candidates}
-                selectedId={selectedId}
-                onSelect={selectCandidate}
-              />
+              <div className="relative flex min-h-0 flex-1 flex-col">
+                <LandingIntelligenceMap
+                  candidates={candidates}
+                  selectedId={selectedId}
+                  onSelect={handleHotspotSelect}
+                  explainPanelOpen={explainOpen}
+                />
+                <ExplainabilityPanel
+                  candidate={selected}
+                  explainability={explainability}
+                  isOpen={explainOpen}
+                  isAnalyzing={isAnalyzing}
+                  onClose={closeExplainability}
+                />
+              </div>
             ) : (
               <div className="flex flex-1 items-center justify-center rounded-xl border border-border-subtle bg-space-deep">
                 <p className="text-sm text-text-muted">Initializing lunar workspace...</p>
@@ -71,7 +96,7 @@ export function LandingIntelligenceWorkspace() {
               candidates={candidates}
               selectedId={selectedId}
               isGenerating={isGenerating}
-              onSelect={selectCandidate}
+              onSelect={handleHotspotSelect}
               onRegenerate={regenerate}
             />
           </GlassPanel>
