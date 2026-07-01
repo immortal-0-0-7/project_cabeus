@@ -42,7 +42,7 @@ export function MissionSimulationSection() {
               />
             </div>
 
-            <div className="border border-border-subtle p-2">
+            <div className="border border-border-subtle bg-space-panel p-2">
               <RoverMetricCards metrics={state.metrics} history={state.history} isActive={isActive} />
             </div>
           </div>

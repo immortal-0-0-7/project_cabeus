@@ -16,7 +16,7 @@ function MetricGrid({ items }: { items: { label: string; value: string; accent?:
       {items.map((item) => (
         <div
           key={item.label}
-          className="rounded-lg border border-border-subtle bg-white/2 p-3"
+          className="rounded-lg border border-border-subtle bg-space-panel p-3"
           style={{ borderLeftColor: item.accent, borderLeftWidth: 2 }}
         >
           <p className="text-[10px] font-medium uppercase tracking-wider text-text-muted">
@@ -61,7 +61,7 @@ export function ReportSectionPreview({ data, section }: ReportSectionPreviewProp
           <SectionBlock title="Primary Finding">
             <p className="text-sm leading-relaxed text-text-secondary">{data.summary.primaryFinding}</p>
           </SectionBlock>
-          <div className="rounded-lg border border-border-subtle bg-white/2 px-4 py-3">
+          <div className="rounded-lg border border-border-subtle bg-space-panel px-4 py-3">
             <p className="text-[10px] uppercase tracking-wider text-text-muted">Pipeline Status</p>
             <p className="mt-1 text-sm text-text-primary">{data.summary.timelineStatus}</p>
           </div>
@@ -84,7 +84,7 @@ export function ReportSectionPreview({ data, section }: ReportSectionPreviewProp
             <div className="overflow-hidden rounded-lg border border-border-subtle">
               <table className="w-full text-xs">
                 <thead>
-                  <tr className="border-b border-border-subtle bg-white/4">
+                  <tr className="border-b border-border-subtle bg-space-elevated">
                     <th className="px-3 py-2 text-left font-medium text-text-muted">Deposit</th>
                     <th className="px-3 py-2 text-right font-medium text-text-muted">Yield</th>
                     <th className="px-3 py-2 text-right font-medium text-text-muted">Confidence</th>
@@ -134,7 +134,7 @@ export function ReportSectionPreview({ data, section }: ReportSectionPreviewProp
             <div className="overflow-hidden rounded-lg border border-border-subtle">
               <table className="w-full text-xs">
                 <thead>
-                  <tr className="border-b border-border-subtle bg-white/4">
+                  <tr className="border-b border-border-subtle bg-space-elevated">
                     <th className="px-3 py-2 text-left font-medium text-text-muted">Site</th>
                     <th className="px-3 py-2 text-right font-medium text-text-muted">Score</th>
                     <th className="px-3 py-2 text-right font-medium text-text-muted">Ice %</th>
@@ -239,11 +239,11 @@ export function ReportSectionPreview({ data, section }: ReportSectionPreviewProp
       return (
         <div className="space-y-5">
           <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col items-center rounded-xl border border-border-subtle bg-white/2 p-4">
+            <div className="flex flex-col items-center rounded-xl border border-border-subtle bg-space-panel p-4">
               <span className="font-mono text-3xl font-bold text-signal">{data.confidence.overall}%</span>
               <span className="mt-1 text-xs text-text-muted">Overall Confidence</span>
             </div>
-            <div className="flex flex-col items-center rounded-xl border border-border-subtle bg-white/2 p-4">
+            <div className="flex flex-col items-center rounded-xl border border-border-subtle bg-space-panel p-4">
               <span className="font-mono text-3xl font-bold text-ice">{data.confidence.modelConfidence}%</span>
               <span className="mt-1 text-xs text-text-muted">Model Confidence</span>
             </div>
@@ -276,7 +276,7 @@ export function ReportSectionPreview({ data, section }: ReportSectionPreviewProp
           {data.recommendations.map((rec, i) => (
             <div
               key={i}
-              className="flex gap-3 rounded-lg border border-border-subtle bg-white/2 p-3"
+              className="flex gap-3 rounded-lg border border-border-subtle bg-space-panel p-3"
             >
               <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-ice/15 font-mono text-xs font-bold text-ice">
                 {i + 1}

@@ -31,7 +31,7 @@ export function AnalysisStageCard({
         'group relative w-full overflow-hidden rounded-xl border text-left transition-colors duration-300',
         isActive
           ? 'border-ice/30 bg-ice/6 shadow-[0_0_24px_rgb(103_216_255/0.08)]'
-          : 'border-border-subtle bg-white/2 hover:border-border-default hover:bg-white/4',
+          : 'border-border-subtle bg-space-panel hover:border-border-default hover:bg-space-elevated',
         compact ? 'p-3' : 'p-4',
       )}
       initial={{ opacity: 0, x: -16 }}

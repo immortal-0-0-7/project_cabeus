@@ -108,32 +108,33 @@ export function TechnologyStackSection() {
   const lineHeight = useTransform(scrollYProgress, [0.15, 0.85], ['0%', '100%']);
 
   return (
-    <LandingSectionShell
-      id="technology"
-      className="border-t border-border-subtle px-8 py-32 md:px-12 md:py-48 lg:px-16"
-    >
-      <div ref={containerRef} className="relative mx-auto max-w-4xl">
-        <SectionHeading
-          label="02 — Processing Pipeline"
-          title="Technology Stack"
-          subtitle="Seven-stage intelligence pipeline from raw SAR to mission-ready landing recommendations."
-        />
-
-        <div className="relative mt-20">
-          <div
-            aria-hidden
-            className="absolute top-0 bottom-0 left-4 hidden w-px bg-white/4 md:block"
-          >
-            <motion.div
-              className="w-full bg-linear-to-b from-electric via-indigo to-deep-purple"
-              style={{ height: lineHeight }}
+    <LandingSectionShell id="technology" className="border-t border-border-subtle">
+      <div className="relative left-1/2 w-screen -translate-x-1/2 bg-space-panel/50 py-32 md:py-48">
+        <div className="px-8 md:px-12 lg:px-16">
+          <div ref={containerRef} className="relative mx-auto max-w-4xl">
+            <SectionHeading
+              label="02 — Processing Pipeline"
+              title="Technology Stack"
+              subtitle="Seven-stage intelligence pipeline from raw SAR to mission-ready landing recommendations."
             />
-          </div>
 
-          <div>
-            {PIPELINE_STAGES.map((stage, i) => (
-              <PipelineStage key={stage.id} stage={stage} index={i} />
-            ))}
+            <div className="relative mt-20">
+              <div
+                aria-hidden
+                className="absolute top-0 bottom-0 -left-12 hidden w-px bg-space-elevated md:block"
+              >
+                <motion.div
+                  className="w-full bg-linear-to-b from-warning via-mission to-danger"
+                  style={{ height: lineHeight }}
+                />
+              </div>
+
+              <div>
+                {PIPELINE_STAGES.map((stage, i) => (
+                  <PipelineStage key={stage.id} stage={stage} index={i} />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -74,7 +74,7 @@ export function RoverMetricCards({ metrics, history }: RoverMetricCardsProps) {
               <span className="font-mono text-xs text-text-muted">{def.unit}</span>
             </div>
             <div className="mt-3">
-              <MetricSparkline data={sparkData} color="#6b8fc7" />
+              <MetricSparkline data={sparkData} color="#F97316" />
             </div>
           </motion.div>
         );

@@ -112,7 +112,7 @@ export function TelemetryMarquee() {
   }, [reducedMotion]);
 
   return (
-    <section className="relative overflow-hidden border-y border-border-subtle py-10">
+    <section className="relative overflow-hidden border-y border-border-subtle bg-space-panel py-10">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-linear-to-r from-space-void to-transparent"

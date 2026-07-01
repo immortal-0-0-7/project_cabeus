@@ -66,7 +66,9 @@ export function MissionOverviewSection() {
 
         {/* Timeline — bare structured data with thin rules, no glass wrapper */}
         <FadeIn className="mt-32" delay={0.15}>
-          <p className="text-label mb-12">Mission Timeline</p>
+          <h3 className="mb-12 font-display text-2xl font-semibold tracking-tight text-text-primary md:text-3xl">
+            Mission Timeline
+          </h3>
           <div>
             {TIMELINE_PHASES.map((phase, i) => (
               <motion.div
@@ -80,7 +82,7 @@ export function MissionOverviewSection() {
                   i > 0 && 'border-t border-border-subtle',
                 )}
               >
-                <span className="font-mono text-xs text-electric">{phase.timestamp}</span>
+                <span className="font-mono text-xs text-mission">{phase.timestamp}</span>
                 <h4
                   className={cn(
                     'font-display text-lg font-medium tracking-tight',
@@ -99,7 +101,7 @@ export function MissionOverviewSection() {
 
         {/* Statistics — horizontal strip with large numbers and thin vertical dividers */}
         <FadeIn className="mt-32" delay={0.2}>
-          <div className="flex flex-wrap gap-y-8">
+          <div className="flex flex-wrap gap-y-8 bg-space-panel px-6 py-8">
             {MISSION_STATISTICS.map((stat, i) => (
               <motion.div
                 key={stat.id}
@@ -108,7 +110,7 @@ export function MissionOverviewSection() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.8, ease: EASE_PREMIUM }}
                 className={cn(
-                  'flex-1 min-w-[140px] px-6 py-4',
+                  'min-w-[140px] flex-1 px-6 py-4',
                   i > 0 && 'border-l border-border-subtle',
                 )}
               >

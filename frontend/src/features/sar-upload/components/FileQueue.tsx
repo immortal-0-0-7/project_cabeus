@@ -45,7 +45,7 @@ export function FileQueue({ files, activeFileId }: FileQueueProps) {
                   'relative overflow-hidden rounded-lg border px-3 py-2.5',
                   isActive
                     ? 'border-ice/30 bg-ice/5'
-                    : 'border-border-subtle bg-white/2',
+                    : 'border-border-subtle bg-space-panel',
                 )}
               >
                 {file.status === 'uploading' && (
@@ -64,7 +64,7 @@ export function FileQueue({ files, activeFileId }: FileQueueProps) {
                         ? 'border-signal/30 bg-signal/10 text-signal'
                         : file.status === 'uploading' || file.status === 'processing'
                           ? 'border-ice/30 bg-ice/10 text-ice'
-                          : 'border-border-default bg-white/3 text-mission',
+                          : 'border-border-default bg-space-panel text-mission',
                     )}
                   >
                     {file.status === 'complete' ? (

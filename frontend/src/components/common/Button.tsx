@@ -9,11 +9,11 @@ const variantStyles: Record<ButtonVariant, string> = {
   primary:
     'bg-text-primary text-space-void',
   secondary:
-    'bg-white/5 text-text-primary border border-white/8 hover:border-warning/35',
+    'bg-space-elevated text-text-primary border border-white/8 hover:border-warning/35',
   ghost:
     'bg-transparent text-text-secondary',
   outline:
-    'bg-transparent text-text-primary border border-border-default hover:border-electric/40',
+    'bg-transparent text-text-primary border border-border-default hover:border-mission/40',
   danger:
     'bg-danger/10 text-danger border border-danger/15',
 };
@@ -58,7 +58,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         className={cn(
           'relative inline-flex items-center justify-center font-medium uppercase transition-all duration-500',
-          'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-electric/50 focus-visible:ring-offset-2 focus-visible:ring-offset-space-void',
+          'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-mission/50 focus-visible:ring-offset-2 focus-visible:ring-offset-space-void',
           'disabled:pointer-events-none disabled:opacity-40',
           variantStyles[variant],
           sizeStyles[size],

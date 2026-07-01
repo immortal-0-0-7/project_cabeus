@@ -104,8 +104,8 @@ export function MissionControlSequence({
           />
           <defs>
             <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#3B82F6" />
-              <stop offset="45%" stopColor="#6366F1" />
+              <stop offset="0%" stopColor="#FBBF24" />
+              <stop offset="45%" stopColor="#F97316" />
               <stop offset="78%" stopColor="#F97316" />
               <stop offset="100%" stopColor="#EF4444" />
             </linearGradient>
@@ -152,7 +152,7 @@ export function MissionControlSequence({
                   (isMissionReady && isComplete
                     ? 'border-signal/40 bg-signal/8 shadow-[0_0_24px_rgb(52_211_153/0.12)]'
                     : 'border-signal/20 bg-signal/4'),
-                status === 'pending' && 'border-border-subtle bg-white/1',
+                status === 'pending' && 'border-border-subtle bg-space-panel',
               )}
             >
               {/* Active stage shimmer */}
@@ -173,7 +173,7 @@ export function MissionControlSequence({
                         ? 'border-signal/50 bg-signal/15 text-signal'
                         : 'border-signal/40 bg-signal/10 text-signal'),
                     isStageActive && 'border-ice/40 bg-ice/10 text-ice',
-                    status === 'pending' && 'border-border-default bg-white/3 text-text-muted',
+                    status === 'pending' && 'border-border-default bg-space-panel text-text-muted',
                   )}
                 >
                   {isStageComplete ? (

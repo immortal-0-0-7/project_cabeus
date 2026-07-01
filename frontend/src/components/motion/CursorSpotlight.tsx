@@ -16,7 +16,7 @@ export function CursorSpotlight({ className, size = 900, opacity = 0.35 }: Curso
   const springY = useSpring(pointerY, { stiffness: 120, damping: 28, mass: 0.4 });
   const gradientX = useMotionTemplate`${springX}%`;
   const gradientY = useMotionTemplate`${springY}%`;
-  const background = useMotionTemplate`radial-gradient(${size}px circle at ${gradientX} ${gradientY}, rgb(103 216 255 / ${opacity}), transparent 42%), radial-gradient(700px circle at 80% 20%, rgb(110 93 255 / 0.08), transparent 50%)`;
+  const background = useMotionTemplate`radial-gradient(${size}px circle at ${gradientX} ${gradientY}, rgb(249 115 22 / ${opacity}), transparent 42%), radial-gradient(700px circle at 80% 20%, rgb(239 68 68 / 0.08), transparent 50%)`;
 
   useEffect(() => {
     if (reducedMotion) return;

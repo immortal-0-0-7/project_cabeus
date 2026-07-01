@@ -25,7 +25,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       disabled={disabled}
       className={cn(
         'inline-flex items-center justify-center border transition-colors duration-200',
-        'text-text-secondary hover:text-text-primary hover:bg-white/5',
+        'text-text-secondary hover:text-text-primary hover:bg-space-elevated',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice/50',
         'disabled:pointer-events-none disabled:opacity-45',
         active

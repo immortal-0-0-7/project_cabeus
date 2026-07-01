@@ -254,7 +254,7 @@ export function LandingIntelligenceMap({
         </motion.div>
 
         {/* HUD overlays */}
-        <div className="pointer-events-none absolute left-3 top-3 flex items-center gap-1.5 rounded-md border border-border-subtle bg-space-panel/85 px-2 py-1 backdrop-blur-sm">
+        <div className="pointer-events-none absolute left-3 top-3 flex items-center gap-1.5 rounded-md border border-border-subtle bg-space-panel px-2 py-1 backdrop-blur-sm">
           <Crosshair className="size-3 text-ice" />
           <span className="font-mono text-[9px] text-text-secondary">
             {explainPanelOpen ? 'XAI PANEL ACTIVE · CLICK HOTSPOT' : 'DFSAR L-BAND · DRAG TO PAN'}
@@ -265,7 +265,7 @@ export function LandingIntelligenceMap({
           {candidates.slice(0, 4).map((site, i) => (
             <div
               key={site.id}
-              className="flex items-center gap-1 rounded-md border border-border-subtle bg-space-panel/85 px-1.5 py-0.5 backdrop-blur-sm"
+              className="flex items-center gap-1 rounded-md border border-border-subtle bg-space-panel px-1.5 py-0.5 backdrop-blur-sm"
             >
               <span
                 className="size-1.5 rounded-full"
@@ -284,7 +284,7 @@ export function LandingIntelligenceMap({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.2, ease: EASE_PREMIUM }}
-              className="pointer-events-none absolute bottom-3 right-3 max-w-[200px] rounded-lg border border-border-subtle bg-space-panel/90 p-2.5 backdrop-blur-md"
+              className="pointer-events-none absolute bottom-3 right-3 max-w-[200px] rounded-lg border border-border-subtle bg-space-panel p-2.5 backdrop-blur-md"
             >
               <div className="flex items-center gap-1.5">
                 <MapPin className="size-3 text-ice" />
@@ -329,7 +329,7 @@ export function LandingIntelligenceMap({
           ].map((metric) => (
             <div
               key={metric.label}
-              className="rounded-lg border border-border-subtle bg-white/2 px-2.5 py-2"
+              className="rounded-lg border border-border-subtle bg-space-panel px-2.5 py-2"
             >
               <p className="text-[10px] text-text-muted">{metric.label}</p>
               <p className="font-mono text-sm font-semibold text-text-primary">

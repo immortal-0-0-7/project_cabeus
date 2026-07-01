@@ -12,13 +12,13 @@ export function AmbientBackground() {
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse 90% 70% at 50% 0%, rgb(107 143 199 / 0.04), transparent 60%)',
+            'radial-gradient(ellipse 90% 70% at 50% 0%, rgb(249 115 22 / 0.04), transparent 60%)',
         }}
       />
 
       <motion.div
         className="absolute left-1/2 top-0 h-[60vh] w-[80vw] -translate-x-1/2 blur-[120px]"
-        style={{ background: 'rgb(107 143 199 / 0.03)' }}
+        style={{ background: 'rgb(249 115 22 / 0.03)' }}
         animate={reducedMotion ? undefined : { opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
       />

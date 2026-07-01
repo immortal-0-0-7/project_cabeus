@@ -49,7 +49,7 @@ export function LandingCandidatesPanel({
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="flex flex-1 flex-col items-center justify-center gap-4 rounded-xl border border-border-subtle bg-white/2 py-16"
+          className="flex flex-1 flex-col items-center justify-center gap-4 rounded-xl border border-border-subtle bg-space-panel py-16"
         >
           <div className="relative">
             <MapPin className="size-8 text-ice/40" />

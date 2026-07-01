@@ -190,7 +190,7 @@ function SectionCard({
       initial={reducedMotion ? false : { opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay, ease: EASE_PREMIUM }}
-      className="rounded-lg border border-border-subtle bg-white/2 p-3"
+      className="rounded-lg border border-border-subtle bg-space-panel p-3"
     >
       <div className="mb-2.5 flex items-center gap-2">
         <div className="flex size-6 items-center justify-center rounded-md border border-cinematic/25 bg-cinematic/10">
@@ -317,7 +317,7 @@ export function ExplainabilityPanel({
               </div>
 
               <motion.div
-                className="mt-3 flex items-center gap-2 rounded-lg border border-border-subtle bg-white/2 px-2.5 py-2"
+                className="mt-3 flex items-center gap-2 rounded-lg border border-border-subtle bg-space-panel px-2.5 py-2"
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
@@ -386,7 +386,7 @@ export function ExplainabilityPanel({
                           initial={reducedMotion ? false : { opacity: 0, x: -8 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.2 + i * 0.05 }}
-                          className="flex items-center gap-2 rounded-md border border-border-subtle bg-space-deep/50 px-2.5 py-2"
+                          className="flex items-center gap-2 rounded-md border border-border-subtle bg-space-deep px-2.5 py-2"
                         >
                           <ChevronRight className="size-3 shrink-0 text-cinematic" />
                           <div className="min-w-0 flex-1">

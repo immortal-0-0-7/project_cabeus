@@ -309,7 +309,7 @@ export function RoverMissionMap({
           )}
         </motion.div>
 
-        <div className="pointer-events-none absolute left-3 top-3 flex items-center gap-1.5 rounded-md border border-border-subtle bg-space-panel/85 px-2 py-1 backdrop-blur-sm">
+        <div className="pointer-events-none absolute left-3 top-3 flex items-center gap-1.5 rounded-md border border-border-subtle bg-space-panel px-2 py-1 backdrop-blur-sm">
           <Crosshair className="size-3 text-ice" />
           <span className="font-mono text-[9px] text-text-secondary">
             {isPlacing ? 'CLICK TO PLACE ROVER' : `PROGRESS ${(pathProgress * 100).toFixed(0)}%`}
@@ -322,7 +322,7 @@ export function RoverMissionMap({
             animate={{ opacity: 1, scale: 1 }}
             className="pointer-events-none absolute inset-0 flex items-center justify-center bg-space-deep/40 backdrop-blur-[2px]"
           >
-            <div className="rounded-xl border border-signal/30 bg-space-panel/90 px-6 py-4 text-center shadow-[0_0_40px_rgb(52_211_153/0.15)]">
+            <div className="rounded-xl border border-signal/30 bg-space-panel px-6 py-4 text-center shadow-[0_0_40px_rgb(52_211_153/0.15)]">
               <Flag className="mx-auto size-6 text-signal" />
               <p className="mt-2 font-display text-sm font-bold text-signal">Mission Complete</p>
               <p className="font-mono text-[10px] text-text-muted">All waypoints traversed</p>
@@ -362,7 +362,7 @@ export function RoverMissionMap({
               {iceDeposits.filter((d) => d.collected).length}/{iceDeposits.length} deposits
             </span>
           </div>
-          <div className="rounded-lg border border-border-subtle bg-white/2 px-2.5 py-1">
+          <div className="rounded-lg border border-border-subtle bg-space-panel px-2.5 py-1">
             <span className="font-mono text-[9px] text-text-muted">PATH </span>
             <span className="font-mono text-[11px] font-semibold text-ice">
               <AnimatedCounter value={pathProgress * 100} decimals={0} suffix="%" />

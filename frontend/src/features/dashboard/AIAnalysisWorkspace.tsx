@@ -200,7 +200,7 @@ export function AIAnalysisWorkspace() {
 
             {/* Layer metric strip */}
             <motion.div
-              className="mt-3 grid grid-cols-3 gap-2 rounded-lg border border-border-subtle bg-white/2 p-2"
+              className="mt-3 grid grid-cols-3 gap-2 rounded-lg border border-border-subtle bg-space-panel p-2"
               key={activeLayer}
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}

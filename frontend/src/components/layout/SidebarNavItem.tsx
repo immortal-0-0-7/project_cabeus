@@ -30,14 +30,14 @@ export function SidebarNavItem({ item, collapsed, onNavigate }: SidebarNavItemPr
             {isActive && (
               <motion.span
                 layoutId="rail-active"
-                className="absolute left-0 top-1/2 h-4 w-px -translate-y-1/2 bg-gradient-to-b from-electric to-deep-purple"
+                className="absolute left-0 top-1/2 h-4 w-px -translate-y-1/2 bg-gradient-to-b from-warning to-danger"
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               />
             )}
             <span
               className={cn(
                 'flex size-[18px] shrink-0 items-center justify-center font-mono text-[10px] tracking-wider transition-colors duration-500',
-                isActive ? 'text-electric' : 'text-text-muted group-hover:text-text-secondary',
+                isActive ? 'text-mission' : 'text-text-muted group-hover:text-text-secondary',
               )}
             >
               {item.code}

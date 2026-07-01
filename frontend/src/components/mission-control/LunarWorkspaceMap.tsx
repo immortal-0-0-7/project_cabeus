@@ -164,12 +164,12 @@ export function LunarWorkspaceMap({
           />
         </motion.div>
 
-        <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-md border border-border-subtle bg-space-panel/80 px-2 py-1 backdrop-blur-sm">
+        <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-md border border-border-subtle bg-space-panel px-2 py-1 backdrop-blur-sm">
           <Crosshair className="size-3 text-ice" />
           <span className="font-mono text-[9px] text-text-secondary">DFSAR L-BAND</span>
         </div>
 
-        <div className="absolute bottom-3 right-3 rounded-md border border-border-subtle bg-space-panel/80 px-2 py-1 backdrop-blur-sm">
+        <div className="absolute bottom-3 right-3 rounded-md border border-border-subtle bg-space-panel px-2 py-1 backdrop-blur-sm">
           <span className="font-mono text-[9px] text-text-muted">
             {selected.lat.toFixed(1)}°S · {Math.abs(selected.lon).toFixed(1)}°{selected.lon >= 0 ? 'E' : 'W'}
           </span>
@@ -193,7 +193,7 @@ export function LunarWorkspaceMap({
           ].map((metric) => (
             <div
               key={metric.label}
-              className="rounded-lg border border-border-subtle bg-white/2 px-2.5 py-2"
+              className="rounded-lg border border-border-subtle bg-space-panel px-2.5 py-2"
             >
               <p className="text-[10px] text-text-muted">{metric.label}</p>
               <p className="font-mono text-sm font-semibold text-text-primary">

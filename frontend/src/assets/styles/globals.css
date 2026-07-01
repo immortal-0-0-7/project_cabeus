@@ -7,13 +7,13 @@
   --color-space-panel: #131316;
   --color-space-elevated: #19191d;
 
-  /* ── Identity spectrum: white → blue → purple ── */
-  --color-ice: #C8E6FA;
-  --color-ice-dim: #5BA3D9;
-  --color-electric: #3B82F6;
-  --color-indigo: #6366F1;
-  --color-deep-purple: #7C3AED;
-  --color-cinematic: #6366F1;
+  /* ── Identity spectrum: yellow → orange → red ── */
+  --color-ice: #FDE68A;
+  --color-ice-dim: #FBBF24;
+  --color-electric: #F97316;
+  --color-indigo: #FB923C;
+  --color-deep-purple: #EF4444;
+  --color-cinematic: #F97316;
 
   /* ── Importance spectrum: amber → red (never blue) ── */
   --color-signal: #22C55E;
@@ -42,10 +42,9 @@
   /* ── Gradient accents ── */
   --gradient-accent-cool: linear-gradient(
     135deg,
-    #c8e6fa 0%,
-    #3b82f6 40%,
-    #6366f1 70%,
-    #7c3aed 100%
+    #fbbf24 0%,
+    #f97316 40%,
+    #ef4444 100%
   );
   --gradient-accent-warm: linear-gradient(
     135deg,
@@ -55,9 +54,8 @@
   );
   --gradient-progress: linear-gradient(
     90deg,
-    #3b82f6 0%,
-    #6366f1 45%,
-    #f97316 85%,
+    #fbbf24 0%,
+    #f97316 45%,
     #ef4444 100%
   );
 
@@ -121,7 +119,7 @@
   }
 
   ::selection {
-    background-color: rgb(99 102 241 / 0.2);
+    background-color: rgb(249 115 22 / 0.2);
     color: var(--color-text-primary);
   }
 
@@ -289,19 +287,18 @@
 
   /* ── Landing page scoped styles ── */
   .landing-page {
-    --landing-ice: #C8E6FA;
-    --landing-electric: #3B82F6;
-    --landing-indigo: #6366F1;
-    --landing-purple: #7C3AED;
+    --landing-ice: #FDE68A;
+    --landing-electric: #F97316;
+    --landing-indigo: #FB923C;
+    --landing-purple: #EF4444;
   }
 
   .landing-page .text-gradient-ice {
     background: linear-gradient(
       135deg,
-      #c8e6fa 0%,
-      #3b82f6 35%,
-      #6366f1 65%,
-      #7c3aed 100%
+      #fbbf24 0%,
+      #f97316 35%,
+      #ef4444 100%
     );
     -webkit-background-clip: text;
     background-clip: text;

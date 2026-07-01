@@ -83,7 +83,7 @@ export function LayerCompareSlider({
         <motion.button
           type="button"
           className={cn(
-            'absolute left-1/2 top-1/2 flex size-9 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full border border-white/20 bg-space-panel/90 shadow-lg backdrop-blur-md transition-shadow',
+            'absolute left-1/2 top-1/2 flex size-9 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full border border-white/20 bg-space-panel shadow-lg backdrop-blur-md transition-shadow',
             isDragging && 'shadow-glow-ice border-ice/40',
           )}
           onPointerDown={handlePointerDown}

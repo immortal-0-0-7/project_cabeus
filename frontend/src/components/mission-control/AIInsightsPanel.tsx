@@ -116,7 +116,7 @@ export function AIInsightsPanel() {
           {mobileOpen && (
             <>
               <motion.div
-                className="fixed inset-0 z-50 bg-space-void/90 backdrop-blur-md"
+                className="fixed inset-0 z-50 bg-space-void backdrop-blur-md"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

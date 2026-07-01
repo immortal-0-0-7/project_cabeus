@@ -42,7 +42,7 @@ export function MissionTelemetry({ phase, overallProgress }: MissionTelemetryPro
         >
           <GlassPanel animate={false} className="px-3 py-2.5">
             <div className="flex items-center gap-2.5">
-              <div className="flex size-7 items-center justify-center rounded-md border border-border-subtle bg-white/3">
+              <div className="flex size-7 items-center justify-center rounded-md border border-border-subtle bg-space-panel">
                 <Icon className="size-3.5 text-ice" strokeWidth={1.5} />
               </div>
               <div className="min-w-0">

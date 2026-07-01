@@ -7,7 +7,9 @@ export function MissionTimeline() {
   return (
     <motion.div variants={fadeIn} className="flex h-full min-w-0 flex-col">
       <div className="mb-6 flex items-center justify-between">
-        <h3 className="text-label">Mission Timeline</h3>
+        <h3 className="font-display text-lg font-semibold tracking-tight text-text-primary">
+          Mission Timeline
+        </h3>
         <span className="font-mono text-[10px] text-text-muted">Phase 3/6</span>
       </div>
 

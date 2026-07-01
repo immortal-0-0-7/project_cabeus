@@ -44,7 +44,7 @@ export function DragDropZone({
         'border-2 border-dashed transition-colors duration-300',
         dragging && !disabled
           ? 'border-ice bg-ice/8'
-          : 'border-border-default bg-white/2 hover:border-ice/25 hover:bg-ice/4',
+          : 'border-border-default bg-space-panel hover:border-ice/25 hover:bg-ice/4',
         disabled && 'pointer-events-none opacity-60',
       )}
     >
@@ -110,7 +110,7 @@ export function DragDropZone({
             'relative flex size-16 items-center justify-center rounded-2xl border',
             dragging || isUploading
               ? 'border-ice/40 bg-ice/10 shadow-[0_0_32px_rgb(103_216_255/0.25)]'
-              : 'border-border-default bg-white/4',
+              : 'border-border-default bg-space-elevated',
           )}
         >
           {isProcessing ? (

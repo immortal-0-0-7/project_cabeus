@@ -150,7 +150,7 @@ function ChartPanel({
   children: ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-border-subtle bg-white/2 p-4">
+    <div className="rounded-xl border border-border-subtle bg-space-panel p-4">
       <div className="mb-3 flex items-center justify-between">
         <h4 className="text-xs font-semibold text-text-primary">{title}</h4>
         <span className="font-mono text-[9px] text-text-muted">{subtitle}</span>

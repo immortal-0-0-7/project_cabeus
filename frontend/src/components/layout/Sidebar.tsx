@@ -21,7 +21,7 @@ export function Sidebar() {
       <AnimatePresence>
         {isMobile && sidebarMobileOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-space-void/90 backdrop-blur-md lg:hidden"
+            className="fixed inset-0 z-40 bg-space-void backdrop-blur-md lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
