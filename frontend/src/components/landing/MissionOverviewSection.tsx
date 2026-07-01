@@ -101,7 +101,7 @@ export function MissionOverviewSection() {
 
         {/* Statistics — horizontal strip with large numbers and thin vertical dividers */}
         <FadeIn className="mt-32" delay={0.2}>
-          <div className="flex flex-wrap gap-y-8 bg-space-panel px-6 py-8">
+          <div className="flex flex-wrap gap-y-8 bg-space-panel/40 px-8 py-10">
             {MISSION_STATISTICS.map((stat, i) => (
               <motion.div
                 key={stat.id}

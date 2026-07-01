@@ -40,7 +40,7 @@ export function Sidebar() {
         )}
         initial={false}
       >
-        <div className="flex h-(--spacing-topbar) shrink-0 items-center gap-3 px-4">
+        <div className="flex h-(--spacing-topbar) shrink-0 items-center gap-3 px-5">
           <Link
             to={ROUTES.home}
             className="flex size-10 shrink-0 items-center justify-center transition-opacity duration-500 hover:opacity-70"
@@ -54,7 +54,7 @@ export function Sidebar() {
               <p className="truncate font-display text-sm font-semibold tracking-tight text-text-primary">
                 Cabeus
               </p>
-              <p className="truncate font-mono text-[9px] tracking-[0.14em] text-text-muted uppercase">
+              <p className="truncate font-mono text-[11px] tracking-[0.14em] text-text-muted uppercase">
                 Mission Control
               </p>
             </div>
@@ -71,8 +71,8 @@ export function Sidebar() {
           )}
         </div>
 
-        <nav className="flex flex-1 flex-col px-3 py-6" aria-label="Mission navigation">
-          <ul className="space-y-1">
+        <nav className="flex flex-1 flex-col px-4 py-8" aria-label="Mission navigation">
+          <ul className="space-y-1.5">
             {DASHBOARD_NAV.map((item, index) => (
               <SidebarNavItem
                 key={item.id}
@@ -86,10 +86,10 @@ export function Sidebar() {
         </nav>
 
         {!isMobile && (
-          <div className="shrink-0 px-3 pb-6">
+          <div className="shrink-0 px-4 pb-8">
             <Link
               to={ROUTES.home}
-              className="flex items-center gap-2 px-3 py-3 text-[10px] font-mono uppercase tracking-[0.16em] text-text-muted transition-colors duration-500 hover:text-text-secondary"
+              className="flex items-center gap-2 rounded-sm px-3 py-3.5 text-xs font-mono uppercase tracking-[0.16em] text-text-muted transition-colors duration-500 hover:text-text-secondary"
             >
               Exit Mission
             </Link>

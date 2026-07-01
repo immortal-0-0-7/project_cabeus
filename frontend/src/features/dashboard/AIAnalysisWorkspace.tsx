@@ -53,14 +53,14 @@ export function AIAnalysisWorkspace() {
       {/* Header */}
       <motion.div variants={fadeUp} className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <Badge color="cinematic">Neural Pipeline</Badge>
+          <Badge color="mission">Neural Pipeline</Badge>
           <DisplayHeading
             as="h2"
-            className="mt-2 font-display text-xl font-bold text-text-primary"
+            className="mt-2 font-display text-2xl font-bold text-text-primary"
           >
             SAR Analysis
           </DisplayHeading>
-          <p className="text-sm text-text-secondary">
+          <p className="text-base text-text-secondary">
             PyTorch ice detection v2.4 · DFSAR L-band · Shackleton region
           </p>
         </div>
@@ -68,12 +68,12 @@ export function AIAnalysisWorkspace() {
           {headerStats.map(({ icon: Icon, label, value, suffix }) => (
             <GlassPanel key={label} animate={false} className="px-3 py-2">
               <div className="flex items-center gap-2.5">
-                <div className="flex size-7 items-center justify-center rounded-lg bg-cinematic/10">
-                  <Icon className="size-3.5 text-cinematic" />
+                <div className="flex size-8 items-center justify-center rounded-lg bg-mission/10">
+                  <Icon className="size-4 text-mission" />
                 </div>
                 <div>
-                  <p className="text-[9px] text-text-muted">{label}</p>
-                  <p className="font-mono text-xs font-semibold text-cinematic">
+                  <p className="text-[11px] text-text-muted">{label}</p>
+                  <p className="font-mono text-sm font-semibold text-mission">
                     <AnimatedCounter value={value} decimals={value % 1 ? 1 : 0} />
                     {suffix}
                   </p>
@@ -95,8 +95,8 @@ export function AIAnalysisWorkspace() {
         <motion.div variants={fadeUp} className="flex min-h-0 flex-col">
           <GlassPanel animate={false} className="flex flex-1 flex-col p-4">
             <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-text-primary">Processing Pipeline</h3>
-              <span className="font-mono text-[9px] text-text-muted">
+              <h3 className="text-base font-semibold text-text-primary">Processing Pipeline</h3>
+              <span className="font-mono text-[11px] text-text-muted">
                 {activeIndex + 1}/{ANALYSIS_LAYERS.length}
               </span>
             </div>
@@ -129,8 +129,8 @@ export function AIAnalysisWorkspace() {
           <GlassPanel animate={false} className="flex flex-1 flex-col p-4">
             <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
               <div>
-                <h3 className="text-sm font-semibold text-text-primary">Analysis Viewport</h3>
-                <p className="text-[10px] text-text-muted">
+                <h3 className="text-base font-semibold text-text-primary">Analysis Viewport</h3>
+                <p className="text-xs text-text-muted">
                   {activeMeta.label} — {activeMeta.description}
                 </p>
               </div>
@@ -139,9 +139,9 @@ export function AIAnalysisWorkspace() {
                   type="button"
                   onClick={() => setCompareMode(false)}
                   className={cn(
-                    'rounded-lg border px-2.5 py-1.5 text-[10px] font-medium transition-all',
+                    'rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-all',
                     !compareMode
-                      ? 'border-ice/30 bg-ice/10 text-ice'
+                      ? 'border-mission/30 bg-mission/10 text-mission'
                       : 'border-border-subtle text-text-muted hover:border-border-default',
                   )}
                 >
@@ -151,16 +151,16 @@ export function AIAnalysisWorkspace() {
                   type="button"
                   onClick={() => setCompareMode(true)}
                   className={cn(
-                    'flex items-center gap-1 rounded-lg border px-2.5 py-1.5 text-[10px] font-medium transition-all',
+                    'flex items-center gap-1 rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-all',
                     compareMode
-                      ? 'border-ice/30 bg-ice/10 text-ice'
+                      ? 'border-mission/30 bg-mission/10 text-mission'
                       : 'border-border-subtle text-text-muted hover:border-border-default',
                   )}
                 >
                   <SlidersHorizontal className="size-3" />
                   Compare
                 </button>
-                <Badge color="ice">{activeMeta.shortLabel}</Badge>
+                <Badge color="mission">{activeMeta.shortLabel}</Badge>
               </div>
             </div>
 
@@ -212,10 +212,10 @@ export function AIAnalysisWorkspace() {
                 { label: 'Coverage', value: 847, unit: 'km²' },
               ].map((item) => (
                 <div key={item.label} className="text-center">
-                  <p className="text-[9px] text-text-muted">{item.label}</p>
-                  <p className="font-mono text-xs font-semibold" style={{ color: activeMeta.accent }}>
+                  <p className="text-[11px] text-text-muted">{item.label}</p>
+                  <p className="font-mono text-sm font-semibold" style={{ color: activeMeta.accent }}>
                     <AnimatedCounter value={item.value} decimals={item.value % 1 ? 1 : 0} />
-                    <span className="text-[9px] font-normal text-text-muted"> {item.unit}</span>
+                    <span className="text-[11px] font-normal text-text-muted"> {item.unit}</span>
                   </p>
                 </div>
               ))}
@@ -228,7 +228,7 @@ export function AIAnalysisWorkspace() {
           <SpectralChart />
           <ConfidenceDistributionChart />
           <GlassPanel animate={false} className="flex-1 p-4">
-            <h3 className="mb-3 text-xs font-semibold text-text-primary">Subsurface Metrics</h3>
+            <h3 className="mb-3 text-sm font-semibold text-text-primary">Subsurface Metrics</h3>
             <ProcessingMetrics delay={0.2} />
           </GlassPanel>
         </motion.div>

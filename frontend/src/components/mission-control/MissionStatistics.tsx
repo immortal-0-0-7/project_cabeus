@@ -7,10 +7,10 @@ import { fadeIn } from '@/utils/motion';
 
 export function MissionStatistics() {
   return (
-    <motion.div variants={fadeIn} className="flex h-full min-w-0 flex-col">
-      <h3 className="text-label mb-6">Statistics</h3>
+    <motion.div variants={fadeIn} className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden px-1">
+      <h3 className="text-label mb-5 shrink-0">Statistics</h3>
 
-      <div className="grid flex-1 grid-cols-2 gap-6 lg:grid-cols-4">
+      <div className="grid min-h-0 flex-1 grid-cols-2 gap-x-6 gap-y-4 overflow-y-auto lg:grid-cols-2">
         {MISSION_STATISTICS.map((stat, index) => {
           const chartData = stat.sparkline.map((v, i) => ({ i, v }));
 
@@ -24,19 +24,19 @@ export function MissionStatistics() {
             >
               <p className="text-label truncate">{stat.label}</p>
               <div className="mt-2 flex items-baseline gap-1">
-                <span className="text-stat-massive text-2xl text-text-primary">
+                <span className="text-stat-massive text-3xl text-text-primary">
                   <AnimatedCounter
                     value={stat.value}
                     decimals={stat.unit === '%' ? 1 : 0}
                   />
                 </span>
-                <span className="font-mono text-xs text-text-muted">{stat.unit}</span>
+                <span className="font-mono text-sm text-text-muted">{stat.unit}</span>
               </div>
 
               {stat.trend !== 0 && (
                 <span
                   className={cn(
-                    'mt-1 block font-mono text-[10px]',
+                    'mt-1 block font-mono text-xs',
                     stat.trend > 0 ? 'text-signal' : 'text-danger',
                   )}
                 >

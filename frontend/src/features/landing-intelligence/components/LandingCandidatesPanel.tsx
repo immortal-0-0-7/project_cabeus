@@ -22,16 +22,17 @@ export function LandingCandidatesPanel({
   onRegenerate,
 }: LandingCandidatesPanelProps) {
   return (
-    <div className="flex min-h-0 flex-col">
-      <div className="mb-3 flex items-center justify-between gap-2">
-        <div className="flex items-center gap-2">
-          <Sparkles className="size-4 text-ice" />
+    <div className="flex min-h-0 min-w-0 flex-col overflow-hidden">
+      <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+        <div className="flex min-w-0 flex-wrap items-center gap-2">
+          <Sparkles className="size-4 shrink-0 text-ice" />
           <h3 className="text-sm font-semibold text-text-primary">Ranked Candidates</h3>
           <Badge color="signal">{candidates.length} sites</Badge>
         </div>
         <Button
           variant="secondary"
           size="sm"
+          className="shrink-0"
           onClick={onRegenerate}
           disabled={isGenerating}
         >
@@ -67,15 +68,20 @@ export function LandingCandidatesPanel({
           </div>
         </motion.div>
       ) : (
-        <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto pr-1">
+        <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto overflow-x-hidden pr-1">
           {candidates.map((candidate, index) => (
-            <LandingCandidateCard
+            <div
               key={candidate.id}
-              candidate={candidate}
-              selected={selectedId === candidate.id}
-              index={index}
-              onSelect={onSelect}
-            />
+              className="rounded-sm border border-border-subtle bg-white/[0.02] px-4"
+            >
+              <LandingCandidateCard
+                candidate={candidate}
+                selected={selectedId === candidate.id}
+                index={index}
+                compact
+                onSelect={onSelect}
+              />
+            </div>
           ))}
         </div>
       )}

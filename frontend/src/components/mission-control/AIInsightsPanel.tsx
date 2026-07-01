@@ -24,7 +24,7 @@ export function AIInsightsPanel() {
       className="flex h-full flex-col"
     >
       <div className="px-6 py-8">
-        <h2 className="font-display text-lg font-medium tracking-tight text-text-primary">
+        <h2 className="font-display text-xl font-medium tracking-tight text-text-primary">
           AI Insights
         </h2>
         <p className="text-label mt-2">Neural inference</p>
@@ -45,7 +45,7 @@ export function AIInsightsPanel() {
                   <div className="flex items-start justify-between gap-3 px-2">
                     <div className="min-w-0 flex-1">
                       <p className="text-label">{insight.category}</p>
-                      <p className="mt-2 text-sm font-medium leading-snug text-text-primary">
+                      <p className="mt-2 text-base font-medium leading-snug text-text-primary">
                         {insight.title}
                       </p>
                     </div>
@@ -67,7 +67,7 @@ export function AIInsightsPanel() {
                         transition={{ duration: 0.5 }}
                         className="overflow-hidden"
                       >
-                        <p className="mt-3 px-2 text-sm leading-relaxed font-light text-text-secondary">
+                        <p className="mt-3 px-2 text-base leading-relaxed font-light text-text-secondary">
                           {insight.body}
                         </p>
                         <div className="mt-4 flex items-center gap-4 px-2">
@@ -79,7 +79,7 @@ export function AIInsightsPanel() {
                               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                             />
                           </div>
-                          <span className="font-mono text-xs text-text-secondary">
+                          <span className="font-mono text-sm text-text-secondary">
                             <AnimatedCounter value={insight.confidence} decimals={1} suffix="%" />
                           </span>
                         </div>
@@ -103,7 +103,7 @@ export function AIInsightsPanel() {
           onClick={() => setMobileOpen(true)}
           className={cn(
             'fixed bottom-[calc(var(--spacing-bottom-dock-mobile)+1.5rem)] right-6 z-40',
-            'px-4 py-2 font-mono text-[10px] tracking-[0.14em] text-text-secondary uppercase',
+            'px-4 py-2 font-mono text-xs tracking-[0.14em] text-text-secondary uppercase',
             'transition-colors duration-500 hover:text-text-primary',
           )}
           initial={{ opacity: 0 }}

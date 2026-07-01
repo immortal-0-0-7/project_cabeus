@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Crosshair, Layers, MapPin, Maximize2, ZoomIn, ZoomOut } from 'lucide-react';
 import { IconButton } from '@/components/common/IconButton';
 import { AnimatedCounter } from '@/components/mission-control/AnimatedCounter';
-import { TARGET_REGION } from '@/data/missionData';
+import { SOUTH_POLE_SAR_IMAGE, TARGET_REGION } from '@/data/missionData';
 import { RISK_LABELS } from '@/features/landing-intelligence/constants';
 import { formatCoordinates } from '@/features/landing-intelligence/utils/generateCandidates';
 import type { LandingCandidate } from '@/features/landing-intelligence/types';
@@ -116,20 +116,23 @@ export function LandingIntelligenceMap({
         onPointerUp={handlePointerUp}
         onPointerLeave={handlePointerUp}
       >
-        <div className="absolute inset-0 grid-mission opacity-40" />
-        <div className="absolute inset-0 noise-overlay opacity-30" />
-
         <motion.div
           className="absolute inset-0 origin-center"
           animate={{ scale: zoom, x: pan.x, y: pan.y }}
           transition={reducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 280, damping: 30 }}
         >
-          <svg viewBox="0 0 100 100" className="size-full" preserveAspectRatio="xMidYMid slice">
+          <img
+            src={SOUTH_POLE_SAR_IMAGE}
+            alt="Chandrayaan-2 DFSAR south polar swath"
+            className="absolute inset-0 size-full object-cover"
+            draggable={false}
+          />
+          <svg viewBox="0 0 100 100" className="relative size-full" preserveAspectRatio="xMidYMid slice">
             <defs>
               <radialGradient id="polarGlowLi" cx="50%" cy="95%" r="55%">
-                <stop offset="0%" stopColor="#67d8ff" stopOpacity="0.3" />
-                <stop offset="50%" stopColor="#4d8cff" stopOpacity="0.1" />
-                <stop offset="100%" stopColor="#02040a" stopOpacity="0" />
+                <stop offset="0%" stopColor="#67d8ff" stopOpacity="0.12" />
+                <stop offset="50%" stopColor="#4d8cff" stopOpacity="0.04" />
+                <stop offset="100%" stopColor="#02040a" stopOpacity="0.35" />
               </radialGradient>
               <radialGradient id="iceHeatLi1" cx="50%" cy="50%" r="50%">
                 <stop offset="0%" stopColor="#67d8ff" stopOpacity="0.55" />
@@ -147,8 +150,6 @@ export function LandingIntelligenceMap({
                 </feMerge>
               </filter>
             </defs>
-
-            <rect width="100" height="100" fill="url(#polarGlowLi)" />
 
             {showHeatmap && (
               <>
@@ -243,14 +244,6 @@ export function LandingIntelligenceMap({
               );
             })}
           </svg>
-
-          {!reducedMotion && (
-            <motion.div
-              className="pointer-events-none absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-ice/50 to-transparent"
-              animate={{ top: ['0%', '100%'] }}
-              transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
-            />
-          )}
         </motion.div>
 
         {/* HUD overlays */}

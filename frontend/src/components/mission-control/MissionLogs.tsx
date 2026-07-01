@@ -21,15 +21,15 @@ export function MissionLogs() {
   }, [logs]);
 
   return (
-    <motion.div variants={fadeIn} className="flex h-full min-w-0 flex-col">
-      <div className="mb-6 flex items-center justify-between">
+    <motion.div variants={fadeIn} className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden px-1">
+      <div className="mb-5 flex shrink-0 items-center justify-between gap-4">
         <h3 className="text-label">Mission Logs</h3>
-        <span className="font-mono text-[10px] text-text-muted">Streaming</span>
+        <span className="shrink-0 font-mono text-xs text-text-muted">Streaming</span>
       </div>
 
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-auto font-mono text-[10px] leading-relaxed"
+        className="min-h-0 flex-1 overflow-y-auto pr-2 font-mono text-xs leading-relaxed"
       >
         <AnimatePresence initial={false}>
           {logs.map((log) => (
@@ -38,13 +38,13 @@ export function MissionLogs() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4 }}
-              className="flex gap-3 py-1"
+              className="grid grid-cols-[4.5rem_4rem_minmax(0,1fr)] items-baseline gap-x-3 gap-y-0.5 py-2"
             >
               <span className="shrink-0 text-text-muted">{log.timestamp}</span>
-              <span className={cn('shrink-0 uppercase', levelStyles[log.level])}>
+              <span className={cn('shrink-0 uppercase tracking-wide', levelStyles[log.level])}>
                 {log.level}
               </span>
-              <span className="min-w-0 truncate text-text-secondary">{log.message}</span>
+              <span className="min-w-0 text-text-secondary">{log.message}</span>
             </motion.div>
           ))}
         </AnimatePresence>

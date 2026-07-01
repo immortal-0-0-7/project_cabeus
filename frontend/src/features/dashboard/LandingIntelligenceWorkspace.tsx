@@ -57,7 +57,7 @@ export function LandingIntelligenceWorkspace() {
 
       <LandingSummaryStrip candidates={candidates} isGenerating={isGenerating} />
 
-      <div className="grid min-h-0 flex-1 gap-12 border-t border-border-subtle pt-10 xl:grid-cols-[1fr_380px]">
+      <div className="grid min-h-0 flex-1 gap-12 border-t border-border-subtle pt-10 xl:grid-cols-[minmax(0,1fr)_minmax(280px,420px)]">
         <motion.div variants={fadeUp} className="relative min-h-[360px]">
           {!isGenerating && candidates.length > 0 ? (
             <div className="relative flex min-h-0 flex-1 flex-col">
@@ -82,7 +82,7 @@ export function LandingIntelligenceWorkspace() {
           )}
         </motion.div>
 
-        <motion.div variants={fadeUp} className="min-h-0 border-t border-border-subtle pt-8 xl:border-t-0 xl:border-l xl:pt-0 xl:pl-10">
+        <motion.div variants={fadeUp} className="min-h-0 min-w-0 overflow-hidden border-t border-border-subtle pt-8 xl:border-t-0 xl:border-l xl:pt-0 xl:pl-10">
           <LandingCandidatesPanel
             candidates={candidates}
             selectedId={selectedId}

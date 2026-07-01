@@ -56,6 +56,7 @@ export const MISSION_ID = 'C2-SAR-ICE-2026';
 export const MISSION_NAME = 'Chandrayaan-2 SAR Ice Intelligence';
 export const ORBITER = 'Chandrayaan-2 Orbiter';
 export const TARGET_REGION = 'Lunar South Polar Region (70°S–90°S)';
+export const SOUTH_POLE_SAR_IMAGE = '/images/sar/original.png';
 
 export const LANDING_SITES: LandingSite[] = [
   {

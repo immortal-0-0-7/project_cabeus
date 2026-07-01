@@ -118,8 +118,8 @@ export function AIDetectionShowcaseSection() {
               type="button"
               onClick={() => setActiveLayer(layer.id)}
               className={cn(
-                'w-full overflow-hidden text-left transition-opacity duration-500',
-                activeLayer === layer.id ? 'opacity-100' : 'opacity-40 hover:opacity-70',
+                'w-full overflow-hidden text-left transition-colors duration-500',
+                activeLayer === layer.id ? 'ring-1 ring-white/20' : 'hover:ring-1 hover:ring-white/10',
               )}
             >
               <div className="aspect-square border border-border-subtle">

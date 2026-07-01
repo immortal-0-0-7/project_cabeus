@@ -4,7 +4,7 @@ import { Crosshair, MapPin, ZoomIn, ZoomOut } from 'lucide-react';
 import { Badge } from '@/components/common/Badge';
 import { IconButton } from '@/components/common/IconButton';
 import { AnimatedCounter } from '@/components/mission-control/AnimatedCounter';
-import { LANDING_SITES, TARGET_REGION, type LandingSite } from '@/data/missionData';
+import { LANDING_SITES, SOUTH_POLE_SAR_IMAGE, TARGET_REGION, type LandingSite } from '@/data/missionData';
 import { cn } from '@/utils/cn';
 
 function siteToCoords(site: LandingSite): { x: number; y: number } {
@@ -47,14 +47,14 @@ export function LunarWorkspaceMap({
     <div className={cn('relative flex h-full flex-col', compact && 'min-h-[280px]')}>
       <div className="mb-3 flex items-center justify-between gap-2">
         <div>
-          <h3 className="text-sm font-semibold text-text-primary">South Polar Workspace</h3>
-          <p className="text-[11px] text-text-muted">{TARGET_REGION}</p>
+          <h3 className="text-base font-semibold text-text-primary">South Polar Workspace</h3>
+          <p className="text-xs text-text-muted">{TARGET_REGION}</p>
         </div>
         <div className="flex items-center gap-1">
           <IconButton label="Zoom out" onClick={() => setZoom((z) => Math.max(0.8, z - 0.1))}>
             <ZoomOut className="size-3.5" />
           </IconButton>
-          <span className="w-10 text-center font-mono text-[10px] text-text-muted">
+          <span className="w-10 text-center font-mono text-xs text-text-muted">
             {(zoom * 100).toFixed(0)}%
           </span>
           <IconButton label="Zoom in" onClick={() => setZoom((z) => Math.min(1.4, z + 0.1))}>
@@ -64,31 +64,33 @@ export function LunarWorkspaceMap({
       </div>
 
       <div className="relative min-h-0 flex-1 overflow-hidden rounded-xl border border-border-subtle bg-space-deep">
-        <div className="absolute inset-0 grid-mission opacity-40" />
-
         <motion.div
           className="absolute inset-0 origin-center"
           animate={{ scale: zoom }}
           transition={{ type: 'spring', stiffness: 260, damping: 28 }}
         >
-          <svg viewBox="0 0 100 100" className="size-full" preserveAspectRatio="xMidYMid slice">
+          <img
+            src={SOUTH_POLE_SAR_IMAGE}
+            alt="Chandrayaan-2 DFSAR south polar swath"
+            className="absolute inset-0 size-full object-cover"
+            draggable={false}
+          />
+          <svg viewBox="0 0 100 100" className="relative size-full" preserveAspectRatio="xMidYMid slice">
             <defs>
               <radialGradient id="polarGlow" cx="50%" cy="95%" r="55%">
-                <stop offset="0%" stopColor="#67d8ff" stopOpacity="0.25" />
-                <stop offset="50%" stopColor="#4d8cff" stopOpacity="0.08" />
-                <stop offset="100%" stopColor="#02040a" stopOpacity="0" />
+                <stop offset="0%" stopColor="#F97316" stopOpacity="0.15" />
+                <stop offset="50%" stopColor="#FB923C" stopOpacity="0.05" />
+                <stop offset="100%" stopColor="#02040a" stopOpacity="0.35" />
               </radialGradient>
               <radialGradient id="iceHeat1" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#67d8ff" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="#67d8ff" stopOpacity="0" />
+                <stop offset="0%" stopColor="#FBBF24" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="#FBBF24" stopOpacity="0" />
               </radialGradient>
               <radialGradient id="iceHeat2" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#4d8cff" stopOpacity="0.35" />
-                <stop offset="100%" stopColor="#4d8cff" stopOpacity="0" />
+                <stop offset="0%" stopColor="#F97316" stopOpacity="0.35" />
+                <stop offset="100%" stopColor="#F97316" stopOpacity="0" />
               </radialGradient>
             </defs>
-
-            <rect width="100" height="100" fill="url(#polarGlow)" />
 
             {showHeatmap && (
               <>
@@ -129,7 +131,7 @@ export function LunarWorkspaceMap({
                     <motion.circle
                       r="4"
                       fill="none"
-                      stroke="#67d8ff"
+                      stroke="#F97316"
                       strokeWidth="0.3"
                       initial={{ r: 2, opacity: 0.8 }}
                       animate={{ r: 5, opacity: 0 }}
@@ -138,7 +140,7 @@ export function LunarWorkspaceMap({
                   )}
                   <circle
                     r={isSelected ? 1.8 : 1.2}
-                    fill={isSelected ? '#67d8ff' : '#4d8cff'}
+                    fill={isSelected ? '#F97316' : '#FB923C'}
                     opacity={isSelected ? 1 : 0.7}
                   />
                   {(isSelected || isHovered) && (
@@ -158,19 +160,19 @@ export function LunarWorkspaceMap({
           </svg>
 
           <motion.div
-            className="pointer-events-none absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-ice/60 to-transparent"
+            className="pointer-events-none absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-mission/60 to-transparent"
             animate={{ top: ['0%', '100%'] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
           />
         </motion.div>
 
         <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-md border border-border-subtle bg-space-panel px-2 py-1 backdrop-blur-sm">
-          <Crosshair className="size-3 text-ice" />
-          <span className="font-mono text-[9px] text-text-secondary">DFSAR L-BAND</span>
+          <Crosshair className="size-3 text-mission" />
+          <span className="font-mono text-[11px] text-text-secondary">DFSAR L-BAND</span>
         </div>
 
         <div className="absolute bottom-3 right-3 rounded-md border border-border-subtle bg-space-panel px-2 py-1 backdrop-blur-sm">
-          <span className="font-mono text-[9px] text-text-muted">
+          <span className="font-mono text-[11px] text-text-muted">
             {selected.lat.toFixed(1)}°S · {Math.abs(selected.lon).toFixed(1)}°{selected.lon >= 0 ? 'E' : 'W'}
           </span>
         </div>
@@ -195,8 +197,8 @@ export function LunarWorkspaceMap({
               key={metric.label}
               className="rounded-lg border border-border-subtle bg-space-panel px-2.5 py-2"
             >
-              <p className="text-[10px] text-text-muted">{metric.label}</p>
-              <p className="font-mono text-sm font-semibold text-text-primary">
+              <p className="text-xs text-text-muted">{metric.label}</p>
+              <p className="font-mono text-base font-semibold text-text-primary">
                 <AnimatedCounter value={metric.value} decimals={1} suffix={metric.suffix} />
               </p>
             </div>
@@ -212,9 +214,9 @@ export function LunarWorkspaceMap({
               type="button"
               onClick={() => handleSelect(site)}
               className={cn(
-                'flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] transition-all',
+                'flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs transition-all',
                 selectedId === site.id
-                  ? 'border-ice/30 bg-ice/10 text-ice'
+                  ? 'border-mission/30 bg-mission/10 text-mission'
                   : 'border-border-subtle text-text-muted hover:text-text-secondary',
               )}
             >

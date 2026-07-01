@@ -30,7 +30,7 @@ export function AnalysisStageCard({
       className={cn(
         'group relative w-full overflow-hidden rounded-xl border text-left transition-colors duration-300',
         isActive
-          ? 'border-ice/30 bg-ice/6 shadow-[0_0_24px_rgb(103_216_255/0.08)]'
+          ? 'border-mission/30 bg-mission/6 shadow-[0_0_24px_rgb(249_115_22/0.08)]'
           : 'border-border-subtle bg-space-panel hover:border-border-default hover:bg-space-elevated',
         compact ? 'p-3' : 'p-4',
       )}
@@ -48,20 +48,13 @@ export function AnalysisStageCard({
           )}
         >
           <SyntheticLayerView layer={layer.id} />
-          {isActive && (
-            <motion.div
-              className="absolute inset-0 rounded-lg ring-2 ring-ice/50"
-              layoutId="stage-ring"
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            />
-          )}
         </div>
 
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-2">
             <div className="flex items-center gap-2">
               <span
-                className="flex size-5 shrink-0 items-center justify-center rounded-full font-mono text-[9px] font-medium"
+                className="flex size-5 shrink-0 items-center justify-center rounded-full font-mono text-[11px] font-medium"
                 style={{
                   background: isComplete ? `${layer.accent}22` : 'rgb(255 255 255 / 0.06)',
                   color: isComplete ? layer.accent : '#64748b',
@@ -69,10 +62,10 @@ export function AnalysisStageCard({
               >
                 {isComplete ? <Check className="size-3" /> : index + 1}
               </span>
-              <h4 className="text-sm font-semibold text-text-primary">{layer.label}</h4>
+              <h4 className="text-base font-semibold text-text-primary">{layer.label}</h4>
             </div>
             <span
-              className="shrink-0 font-mono text-[10px] font-medium"
+              className="shrink-0 font-mono text-xs font-medium"
               style={{ color: layer.accent }}
             >
               <AnimatedCounter value={layer.metricValue} decimals={layer.metricValue % 1 ? 1 : 0} />
@@ -81,11 +74,11 @@ export function AnalysisStageCard({
           </div>
 
           {!compact && (
-            <p className="mt-1 text-[11px] leading-relaxed text-text-muted">{layer.description}</p>
+            <p className="mt-1 text-xs leading-relaxed text-text-muted">{layer.description}</p>
           )}
 
           <div className="mt-2 flex items-center gap-2">
-            <span className="text-[9px] text-text-muted">{layer.metric}</span>
+            <span className="text-[11px] text-text-muted">{layer.metric}</span>
             <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/6">
               <motion.div
                 className="h-full rounded-full"

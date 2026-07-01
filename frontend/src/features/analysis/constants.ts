@@ -1,4 +1,21 @@
-import type { AnalysisLayer, AnalysisStatistic, ConfidenceBucket, SpectralBand } from './types';
+import type { AnalysisLayer, AnalysisLayerId, AnalysisStatistic, ConfidenceBucket, SpectralBand } from './types';
+
+/** Warm dashboard palette — yellow → orange → red (no blue/purple) */
+export const ANALYSIS_PALETTE = {
+  neutral: '#64748b',
+  amber: '#FBBF24',
+  orange: '#F97316',
+  coral: '#FB923C',
+  signal: '#22C55E',
+} as const;
+
+export const LAYER_IMAGES: Record<AnalysisLayerId, string> = {
+  original: '/images/sar/original.png',
+  enhanced: '/images/sar/enhanced.png',
+  segmentation: '/images/sar/segmentation.png',
+  heatmap: '/images/sar/heatmap.png',
+  landing: '/images/sar/landing.png',
+};
 
 export const ANALYSIS_LAYERS: AnalysisLayer[] = [
   {
@@ -6,7 +23,7 @@ export const ANALYSIS_LAYERS: AnalysisLayer[] = [
     label: 'Original SAR',
     shortLabel: 'Raw',
     description: 'DFSAR L-band backscatter — unprocessed swath',
-    accent: '#64748b',
+    accent: ANALYSIS_PALETTE.neutral,
     metric: 'SNR',
     metricValue: 12.4,
     metricUnit: 'dB',
@@ -16,7 +33,7 @@ export const ANALYSIS_LAYERS: AnalysisLayer[] = [
     label: 'Enhanced SAR',
     shortLabel: 'Enhanced',
     description: 'Speckle-filtered radiometric calibration',
-    accent: '#4d8cff',
+    accent: ANALYSIS_PALETTE.coral,
     metric: 'SNR Gain',
     metricValue: 18.3,
     metricUnit: 'dB',
@@ -26,7 +43,7 @@ export const ANALYSIS_LAYERS: AnalysisLayer[] = [
     label: 'Segmentation',
     shortLabel: 'Segment',
     description: 'Neural boundary detection — regolith vs ice',
-    accent: '#6e5dff',
+    accent: ANALYSIS_PALETTE.orange,
     metric: 'IoU Score',
     metricValue: 91.7,
     metricUnit: '%',
@@ -36,7 +53,7 @@ export const ANALYSIS_LAYERS: AnalysisLayer[] = [
     label: 'Confidence Heatmap',
     shortLabel: 'Heatmap',
     description: 'Subsurface ice probability distribution',
-    accent: '#67d8ff',
+    accent: ANALYSIS_PALETTE.amber,
     metric: 'Ice Confidence',
     metricValue: 87.4,
     metricUnit: '%',
@@ -46,7 +63,7 @@ export const ANALYSIS_LAYERS: AnalysisLayer[] = [
     label: 'Landing Overlay',
     shortLabel: 'Landing',
     description: 'Ranked landing corridors with safety zones',
-    accent: '#34d399',
+    accent: ANALYSIS_PALETTE.signal,
     metric: 'Site Score',
     metricValue: 94.2,
     metricUnit: '%',
@@ -61,7 +78,7 @@ export const ANALYSIS_STATISTICS: AnalysisStatistic[] = [
     unit: 'km²',
     trend: 12.4,
     sparkline: [420, 510, 580, 620, 710, 780, 847],
-    color: '#4d8cff',
+    color: ANALYSIS_PALETTE.coral,
   },
   {
     id: 'ice-prob',
@@ -70,7 +87,7 @@ export const ANALYSIS_STATISTICS: AnalysisStatistic[] = [
     unit: '%',
     trend: 4.2,
     sparkline: [62, 68, 74, 79, 82, 85, 87.4],
-    color: '#67d8ff',
+    color: ANALYSIS_PALETTE.amber,
   },
   {
     id: 'model-conf',
@@ -79,7 +96,7 @@ export const ANALYSIS_STATISTICS: AnalysisStatistic[] = [
     unit: '%',
     trend: 2.1,
     sparkline: [78, 82, 86, 89, 91, 93, 94.2],
-    color: '#6e5dff',
+    color: ANALYSIS_PALETTE.orange,
   },
   {
     id: 'penetration',
@@ -88,7 +105,7 @@ export const ANALYSIS_STATISTICS: AnalysisStatistic[] = [
     unit: 'm',
     trend: 0.6,
     sparkline: [2.1, 2.8, 3.2, 3.8, 4.1, 4.5, 4.8],
-    color: '#34d399',
+    color: ANALYSIS_PALETTE.signal,
   },
 ];
 
@@ -105,14 +122,14 @@ export const SPECTRAL_DATA: SpectralBand[] = [
 export const CONFIDENCE_DISTRIBUTION: ConfidenceBucket[] = [
   { range: '0–20', count: 12, fill: '#1e293b' },
   { range: '20–40', count: 28, fill: '#334155' },
-  { range: '40–60', count: 45, fill: '#4d8cff' },
-  { range: '60–80', count: 89, fill: '#67d8ff' },
-  { range: '80–100', count: 124, fill: '#34d399' },
+  { range: '40–60', count: 45, fill: ANALYSIS_PALETTE.coral },
+  { range: '60–80', count: 89, fill: ANALYSIS_PALETTE.orange },
+  { range: '80–100', count: 124, fill: ANALYSIS_PALETTE.signal },
 ];
 
 export const PROCESSING_METRICS = [
-  { label: 'Ice Signature', value: 87.4, max: 100 },
-  { label: 'Permittivity εr', value: 3.2, max: 10 },
-  { label: 'Penetration Depth', value: 4.8, max: 10 },
-  { label: 'Terrain Stability', value: 91.8, max: 100 },
+  { label: 'Ice Signature', value: 87.4, max: 100, color: ANALYSIS_PALETTE.amber },
+  { label: 'Permittivity εr', value: 3.2, max: 10, color: ANALYSIS_PALETTE.orange },
+  { label: 'Penetration Depth', value: 4.8, max: 10, color: ANALYSIS_PALETTE.coral },
+  { label: 'Terrain Stability', value: 91.8, max: 100, color: ANALYSIS_PALETTE.signal },
 ];

@@ -38,13 +38,13 @@ export function LandingIntelligenceSection() {
               )}
             </div>
 
-            <div className="space-y-3">
+            <div className="min-w-0 space-y-3 overflow-hidden">
               {isGenerating
                 ? Array.from({ length: 3 }).map((_, i) => (
                     <div key={i} className="h-28 animate-pulse border border-border-subtle bg-space-panel" />
                   ))
                 : candidates.slice(0, 4).map((candidate, i) => (
-                    <div key={candidate.id} className="border border-border-subtle bg-space-panel px-2 transition-colors duration-500 hover:border-white/10">
+                    <div key={candidate.id} className="border border-border-subtle bg-space-panel px-5 py-1 transition-colors duration-500 hover:border-white/10">
                       <LandingCandidateCard
                         candidate={candidate}
                         selected={candidate.id === selectedId}

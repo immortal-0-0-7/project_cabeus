@@ -77,40 +77,40 @@ export function LayerCompareSlider({
       </div>
 
       <div
-        className="absolute inset-y-0 z-10 w-0.5 -translate-x-1/2 bg-white/80 shadow-[0_0_12px_rgb(103_216_255/0.6)]"
+        className="absolute inset-y-0 z-10 w-0.5 -translate-x-1/2 bg-white/80 shadow-[0_0_12px_rgb(249_115_22/0.5)]"
         style={{ left: `${position}%` }}
       >
         <motion.button
           type="button"
           className={cn(
             'absolute left-1/2 top-1/2 flex size-9 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full border border-white/20 bg-space-panel shadow-lg backdrop-blur-md transition-shadow',
-            isDragging && 'shadow-glow-ice border-ice/40',
+            isDragging && 'shadow-glow-ice border-mission/40',
           )}
           onPointerDown={handlePointerDown}
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
           aria-label="Drag to compare layers"
         >
-          <GripVertical className="size-4 text-ice" />
+          <GripVertical className="size-4 text-mission" />
         </motion.button>
       </div>
 
       <div className="pointer-events-none absolute inset-x-0 top-0 flex justify-between p-3">
         <motion.span
-          className="rounded-md border border-border-subtle bg-black/50 px-2 py-1 font-mono text-[10px] text-text-secondary backdrop-blur-sm"
+          className="rounded-md border border-border-subtle bg-black/50 px-2 py-1 font-mono text-xs text-text-secondary backdrop-blur-sm"
           animate={{ opacity: position > 20 ? 1 : 0.4 }}
         >
           {beforeLabel}
         </motion.span>
         <motion.span
-          className="rounded-md border border-border-subtle bg-black/50 px-2 py-1 font-mono text-[10px] text-text-secondary backdrop-blur-sm"
+          className="rounded-md border border-border-subtle bg-black/50 px-2 py-1 font-mono text-xs text-text-secondary backdrop-blur-sm"
           animate={{ opacity: position < 80 ? 1 : 0.4 }}
         >
           {afterLabel}
         </motion.span>
       </div>
 
-      <div className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full border border-border-subtle bg-black/40 px-3 py-1 font-mono text-[9px] text-text-muted backdrop-blur-sm opacity-0 transition-opacity group-hover:opacity-100">
+      <div className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full border border-border-subtle bg-black/40 px-3 py-1 font-mono text-[11px] text-text-muted backdrop-blur-sm opacity-0 transition-opacity group-hover:opacity-100">
         Drag to compare
       </div>
     </div>

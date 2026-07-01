@@ -44,7 +44,7 @@ interface RoverMetricCardsProps {
 
 export function RoverMetricCards({ metrics, history }: RoverMetricCardsProps) {
   return (
-    <div className="space-y-0 divide-y divide-border-subtle">
+    <div className="space-y-3">
       {MISSION_METRICS.map((def, index) => {
         const value = metrics[def.id];
         const sparkData = history[def.id];
@@ -52,7 +52,7 @@ export function RoverMetricCards({ metrics, history }: RoverMetricCardsProps) {
         return (
           <motion.div
             key={def.id}
-            className="py-6"
+            className="rounded-sm border border-border-subtle bg-white/[0.02] px-5 py-4"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.06, duration: 0.8 }}

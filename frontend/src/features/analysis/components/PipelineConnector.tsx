@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import { ANALYSIS_PALETTE } from '../constants';
 import { EASE_PREMIUM } from '@/utils/motion';
 
 interface PipelineConnectorProps {
@@ -31,7 +32,7 @@ export function PipelineConnector({ delay = 0, active = false }: PipelineConnect
         >
           <ChevronDown
             className="size-4"
-            style={{ color: active ? '#67d8ff' : 'rgb(148 163 184 / 0.5)' }}
+            style={{ color: active ? ANALYSIS_PALETTE.orange : 'rgb(148 163 184 / 0.5)' }}
           />
         </motion.div>
       </motion.div>

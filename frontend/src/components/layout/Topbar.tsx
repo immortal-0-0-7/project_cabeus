@@ -51,13 +51,13 @@ export function Topbar({
             {title}
           </DisplayHeading>
           {subtitle && (
-            <p className="mt-0.5 truncate text-sm text-text-muted">{subtitle}</p>
+            <p className="mt-0.5 truncate text-base text-text-muted">{subtitle}</p>
           )}
         </div>
       </div>
 
       <div className="flex shrink-0 items-center gap-6">
-        <div className="hidden items-baseline gap-2 font-mono text-xs md:flex">
+        <div className="hidden items-baseline gap-2 font-mono text-sm md:flex">
           <span className="text-label">UTC</span>
           <LiveClock />
         </div>

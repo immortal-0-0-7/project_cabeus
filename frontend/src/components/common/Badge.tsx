@@ -21,7 +21,7 @@ export function Badge({ children, color = 'ice', pulse = false, className }: Bad
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em]',
+        'inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em]',
         colorStyles[color],
         className,
       )}

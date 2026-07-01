@@ -29,13 +29,15 @@ export interface LandingCandidateCardProps {
   selected: boolean;
   index: number;
   onSelect: (id: string) => void;
+  compact?: boolean;
 }
 
 export function LandingCandidateCard({
   candidate,
-  selected,
+  selected: _selected,
   index,
   onSelect,
+  compact = false,
 }: LandingCandidateCardProps) {
   const reducedMotion = useReducedMotion();
 
@@ -51,40 +53,45 @@ export function LandingCandidateCard({
       type="button"
       onClick={() => onSelect(candidate.id)}
       className={cn(
-        'group relative w-full py-6 text-left transition-opacity duration-500',
-        selected ? 'opacity-100' : 'opacity-70 hover:opacity-90',
+        'group relative w-full min-w-0 text-left transition-colors duration-500',
+        compact ? 'px-1 py-4' : 'py-6',
       )}
       initial={reducedMotion ? false : { opacity: 0, y: 16 }}
-      animate={{ opacity: selected ? 1 : 0.7 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.8, delay: index * 0.06, ease: EASE_PREMIUM }}
       layout
     >
-      <div className="flex items-start justify-between gap-6">
+      <div className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="font-mono text-xs text-text-muted">
               {String(candidate.rank).padStart(2, '0')}
             </span>
             <Badge color={statusBadge[candidate.status]}>{candidate.status}</Badge>
           </div>
-          <h3 className="mt-3 flex items-center gap-2 font-display text-lg font-medium tracking-tight text-text-primary">
+          <h3 className="mt-2 flex items-center gap-2 font-display text-base font-medium tracking-tight text-text-primary sm:text-lg">
             <MapPin className="size-3.5 shrink-0 text-text-muted" strokeWidth={1.25} />
-            {candidate.name}
+            <span className="truncate">{candidate.name}</span>
           </h3>
-          <p className="mt-1 font-mono text-xs text-text-muted">
+          <p className="mt-1 truncate font-mono text-xs text-text-muted">
             {formatCoordinates(candidate.lat, candidate.lon)}
           </p>
         </div>
 
         <div className="shrink-0 text-right">
-          <p className="text-stat-massive text-3xl text-text-primary">
+          <p className={cn('text-stat-massive text-text-primary', compact ? 'text-2xl' : 'text-3xl')}>
             <AnimatedCounter value={candidate.compositeScore} decimals={1} />
           </p>
-          <p className="text-label mt-1">{RISK_LABELS[candidate.riskLevel]} risk</p>
+          <p className="text-label mt-1 whitespace-nowrap">{RISK_LABELS[candidate.riskLevel]} risk</p>
         </div>
       </div>
 
-      <div className="mt-6 grid grid-cols-4 gap-6">
+      <div
+        className={cn(
+          'mt-4 grid gap-x-4 gap-y-3',
+          compact ? 'grid-cols-2' : 'grid-cols-2 sm:grid-cols-4',
+        )}
+      >
         {metrics.map((metric) => (
           <div key={metric.label}>
             <div className="flex items-center gap-1.5">
@@ -102,7 +109,7 @@ export function LandingCandidateCard({
         ))}
       </div>
 
-      <div className="mt-4 flex gap-6 text-xs text-text-muted">
+      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-text-muted">
         <span className="flex items-center gap-1">
           <Clock className="size-3" />
           {candidate.missionDurationSols} sols

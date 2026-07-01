@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ANALYSIS_STATISTICS } from '../constants';
+import { ANALYSIS_STATISTICS, PROCESSING_METRICS } from '../constants';
 import { StatSparkline } from './AnalysisCharts';
 import { AnimatedCounter } from '@/components/mission-control/AnimatedCounter';
 import { Card } from '@/components/common/Card';
@@ -22,22 +22,22 @@ export function AnalysisStatistics() {
             className="pointer-events-none absolute -right-4 -top-4 size-20 rounded-full opacity-20 blur-2xl"
             style={{ background: stat.color }}
           />
-          <p className="text-[10px] font-medium uppercase tracking-wider text-text-muted">
+          <p className="text-[12px] font-medium uppercase tracking-wider text-text-muted">
             {stat.label}
           </p>
           <div className="mt-1 flex items-baseline gap-1.5">
-            <span className="font-mono text-xl font-bold text-text-primary">
+            <span className="font-mono text-2xl font-bold text-text-primary">
               <AnimatedCounter
                 value={stat.value}
                 decimals={stat.unit === '%' || stat.unit === 'm' ? 1 : 0}
               />
             </span>
-            <span className="font-mono text-[10px] text-text-muted">{stat.unit}</span>
+            <span className="font-mono text-xs text-text-muted">{stat.unit}</span>
           </div>
           {stat.trend !== 0 && (
             <span
               className={cn(
-                'mt-0.5 inline-block font-mono text-[9px]',
+                'mt-0.5 inline-block font-mono text-[11px]',
                 stat.trend > 0 ? 'text-signal' : 'text-danger',
               )}
             >
@@ -59,23 +59,16 @@ interface ProcessingMetricsProps {
 }
 
 export function ProcessingMetrics({ delay = 0 }: ProcessingMetricsProps) {
-  const metrics = [
-    { label: 'Ice Signature', value: 87.4, max: 100, color: '#67d8ff' },
-    { label: 'Permittivity εr', value: 3.2, max: 10, color: '#6e5dff' },
-    { label: 'Penetration Depth', value: 4.8, max: 10, color: '#4d8cff' },
-    { label: 'Terrain Stability', value: 91.8, max: 100, color: '#34d399' },
-  ];
-
   return (
     <div className="space-y-3">
-      {metrics.map((metric, i) => (
+      {PROCESSING_METRICS.map((metric, i) => (
         <motion.div
           key={metric.label}
           initial={{ opacity: 0, x: 8 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: delay + i * 0.06, duration: 0.35 }}
         >
-          <div className="flex justify-between text-[10px]">
+          <div className="flex justify-between text-xs">
             <span className="text-text-muted">{metric.label}</span>
             <span className="font-mono font-medium" style={{ color: metric.color }}>
               <AnimatedCounter value={metric.value} decimals={1} />

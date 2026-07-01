@@ -20,7 +20,7 @@ export function SidebarNavItem({ item, collapsed, onNavigate }: SidebarNavItemPr
         title={collapsed ? item.label : undefined}
         className={({ isActive }) =>
           cn(
-            'group relative flex items-center gap-3 px-3 py-3 transition-colors duration-500',
+            'group relative flex items-center gap-3.5 rounded-sm px-3.5 py-3.5 transition-colors duration-500',
             isActive ? 'text-text-primary' : 'text-text-muted hover:text-text-secondary',
           )
         }
@@ -36,14 +36,14 @@ export function SidebarNavItem({ item, collapsed, onNavigate }: SidebarNavItemPr
             )}
             <span
               className={cn(
-                'flex size-[18px] shrink-0 items-center justify-center font-mono text-[10px] tracking-wider transition-colors duration-500',
+                'flex size-[18px] shrink-0 items-center justify-center font-mono text-xs tracking-wider transition-colors duration-500',
                 isActive ? 'text-mission' : 'text-text-muted group-hover:text-text-secondary',
               )}
             >
               {item.code}
             </span>
             {!collapsed && (
-              <span className="min-w-0 flex-1 truncate text-sm font-medium tracking-tight">
+              <span className="min-w-0 flex-1 truncate text-base font-medium tracking-normal">
                 {item.label}
               </span>
             )}

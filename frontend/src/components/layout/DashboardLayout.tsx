@@ -24,13 +24,13 @@ export function DashboardLayout() {
   }, []);
 
   return (
-    <div className="relative flex h-dvh overflow-hidden bg-space-void">
+    <div className="dashboard-ui relative flex h-dvh overflow-hidden bg-space-void">
       <AmbientBackground />
       <Sidebar />
 
       <div
         className={cn(
-          'flex min-w-0 flex-1 flex-col',
+          'flex min-h-0 min-w-0 flex-1 flex-col',
           !isMobile && 'ml-(--spacing-sidebar)',
         )}
       >

@@ -110,7 +110,7 @@
     background-color: var(--color-space-void);
     color: var(--color-text-primary);
     overflow-x: hidden;
-    letter-spacing: -0.015em;
+    letter-spacing: 0.01em;
   }
 
   #root {
@@ -198,7 +198,7 @@
   .text-editorial {
     font-family: var(--font-display);
     font-weight: 600;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.015em;
     line-height: 0.92;
     color: var(--color-text-primary);
   }
@@ -206,22 +206,57 @@
   .text-stat-massive {
     font-family: var(--font-display);
     font-weight: 600;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.01em;
     line-height: 0.85;
     font-variant-numeric: tabular-nums;
   }
 
   .text-label {
     font-family: var(--font-mono);
-    font-size: 0.625rem;
+    font-size: 0.6875rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--color-text-muted);
   }
 
+  /* ── Dashboard typography scale ── */
+  .dashboard-ui .text-label {
+    font-size: 0.75rem;
+  }
+
+  .dashboard-ui .text-xs {
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+  }
+
+  .dashboard-ui .text-sm {
+    font-size: 0.9375rem;
+    line-height: 1.375rem;
+  }
+
+  .dashboard-ui .text-base {
+    font-size: 1.0625rem;
+    line-height: 1.625rem;
+  }
+
+  .dashboard-ui .text-lg {
+    font-size: 1.1875rem;
+    line-height: 1.75rem;
+  }
+
+  .dashboard-ui .text-xl {
+    font-size: 1.3125rem;
+    line-height: 1.875rem;
+  }
+
+  .dashboard-ui .text-2xl {
+    font-size: 1.5625rem;
+    line-height: 2rem;
+  }
+
   .hero-heading {
     color: var(--color-text-primary);
-    letter-spacing: -0.05em;
+    letter-spacing: -0.02em;
   }
 
   .text-gradient-accent {
