@@ -3,3 +3,7 @@ export { Magnet } from './Magnet';
 export { AnimatedText } from './AnimatedText';
 export { SectionHeading } from './SectionHeading';
 export { ScrollIndicator } from './ScrollIndicator';
+export { CursorSpotlight } from './CursorSpotlight';
+export { ScrollProgress } from './ScrollProgress';
+export { ParallaxLayer } from './ParallaxLayer';
+export { TiltCard } from './TiltCard';

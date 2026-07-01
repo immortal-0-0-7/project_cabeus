@@ -221,6 +221,81 @@
   .glow-mission {
     box-shadow: none;
   }
+
+  /* ── Landing page atmosphere (scoped — dashboard unchanged) ── */
+  .landing-page {
+    --landing-ice: #67d8ff;
+    --landing-mission: #4d8cff;
+    --landing-cinematic: #6e5dff;
+    --landing-glow-ice: 0 0 24px rgb(103 216 255 / 0.25);
+    --landing-glow-mission: 0 0 32px rgb(77 140 255 / 0.2);
+  }
+
+  .landing-page .text-gradient-ice {
+    background: linear-gradient(
+      135deg,
+      var(--landing-ice) 0%,
+      var(--landing-mission) 50%,
+      var(--landing-cinematic) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .landing-page .landing-glass {
+    background: rgb(10 15 30 / 0.55);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    box-shadow: var(--landing-glow-mission);
+  }
+
+  .landing-page .landing-glass-hover {
+    transition:
+      border-color 0.4s var(--ease-premium),
+      box-shadow 0.4s var(--ease-premium),
+      transform 0.4s var(--ease-premium);
+  }
+
+  .landing-page .landing-glass-hover:hover {
+    border-color: rgb(103 216 255 / 0.22);
+    box-shadow: var(--landing-glow-ice);
+  }
+
+  .landing-page .landing-grid {
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 20%, transparent 75%);
+  }
+
+  .landing-page .landing-divider-glow {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(103 216 255 / 0.35) 50%,
+      transparent
+    );
+  }
+
+  .landing-page .glow-ice {
+    box-shadow: var(--landing-glow-ice);
+  }
+
+  .landing-page .glow-mission {
+    box-shadow: var(--landing-glow-mission);
+  }
+
+  .landing-page .text-ice-bright {
+    color: var(--landing-ice);
+  }
+
+  .landing-page .border-ice-glow {
+    border-color: rgb(103 216 255 / 0.2);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

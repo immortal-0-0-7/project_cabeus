@@ -20,7 +20,7 @@ export function SectionHeading({
     <FadeIn className={cn(align === 'center' && 'text-center', className)}>
       <p className="text-label">{label}</p>
       <h2 className="text-editorial mt-6 text-[clamp(2.75rem,9vw,5.5rem)] uppercase">
-        {title}
+        <span className="text-gradient-ice">{title}</span>
       </h2>
       {subtitle && (
         <p className="mx-auto mt-8 max-w-xl text-[clamp(1.0625rem,2vw,1.25rem)] leading-relaxed font-light text-text-secondary">

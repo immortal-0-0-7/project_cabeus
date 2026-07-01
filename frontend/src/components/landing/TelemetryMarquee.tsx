@@ -112,7 +112,15 @@ export function TelemetryMarquee() {
   }, [reducedMotion]);
 
   return (
-    <section className="overflow-hidden border-y border-border-subtle py-10">
+    <section className="relative overflow-hidden border-y border-border-subtle py-10">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-linear-to-r from-space-void to-transparent"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-linear-to-l from-space-void to-transparent"
+      />
       <FadeIn>
         <MarqueeRow
           items={TELEMETRY}

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { AnimatedCounter } from '@/components/mission-control/AnimatedCounter';
-import { AnimatedText, FadeIn, SectionHeading } from '@/components/motion';
+import { LandingSectionShell } from '@/components/landing/LandingSectionShell';
+import { AnimatedText, FadeIn, SectionHeading, TiltCard } from '@/components/motion';
 import { MISSION_STATISTICS, TIMELINE_PHASES } from '@/data/missionData';
 import { cn } from '@/utils/cn';
 import { EASE_PREMIUM } from '@/utils/motion';
@@ -26,13 +27,18 @@ const PROBLEM_ITEMS = [
 
 export function MissionOverviewSection() {
   return (
-    <section id="overview" className="relative px-8 py-32 md:px-12 md:py-48 lg:px-16">
+    <LandingSectionShell
+      id="overview"
+      className="px-8 py-32 md:px-12 md:py-48 lg:px-16"
+    >
       <div className="relative mx-auto max-w-5xl">
         <SectionHeading
           label="01 — Mission Briefing"
           title="Why Lunar Ice Matters"
           subtitle="From Chandrayaan-2 SAR swaths to landing-ready intelligence."
         />
+
+        <div className="landing-divider-glow mx-auto mt-12 w-48" />
 
         <div className="mt-20">
           <AnimatedText
@@ -41,36 +47,36 @@ export function MissionOverviewSection() {
           />
         </div>
 
-        <div className="mt-28 space-y-0">
+        <div className="mt-28 grid gap-6 md:grid-cols-2">
           {PROBLEM_ITEMS.map((item, i) => (
             <FadeIn key={item.title} delay={i * 0.08}>
-              <div className="border-t border-border-subtle py-12 md:py-16">
-                <div className="grid gap-6 md:grid-cols-[1fr_2fr] md:gap-16">
-                  <h3 className="font-display text-[clamp(1.5rem,3vw,2rem)] font-semibold tracking-[-0.03em] text-text-primary">
+              <TiltCard className="group h-full">
+                <div className="landing-glass landing-glass-hover h-full rounded-xl p-8 md:p-10">
+                  <h3 className="font-display text-[clamp(1.25rem,2.5vw,1.75rem)] font-semibold tracking-[-0.03em] text-text-primary">
                     {item.title}
                   </h3>
-                  <p className="text-base leading-relaxed font-light text-text-secondary md:text-lg">
+                  <p className="mt-4 text-base leading-relaxed font-light text-text-secondary">
                     {item.body}
                   </p>
                 </div>
-              </div>
+              </TiltCard>
             </FadeIn>
           ))}
         </div>
 
         <FadeIn className="mt-32" delay={0.15}>
           <p className="text-label mb-16 text-center">Mission Timeline</p>
-          <div className="space-y-0">
+          <div className="landing-glass rounded-xl px-6 py-2 md:px-8">
             {TIMELINE_PHASES.map((phase, i) => (
               <motion.div
                 key={phase.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ delay: i * 0.1, duration: 0.9, ease: EASE_PREMIUM }}
-                className="grid grid-cols-[auto_1fr] gap-8 border-t border-border-subtle py-8 md:grid-cols-[120px_1fr_2fr] md:gap-12 md:py-10"
+                className="grid grid-cols-[auto_1fr] gap-8 border-t border-border-subtle py-8 first:border-t-0 md:grid-cols-[120px_1fr_2fr] md:gap-12 md:py-10"
               >
-                <span className="font-mono text-xs text-text-muted">{phase.timestamp}</span>
+                <span className="font-mono text-xs text-ice-bright">{phase.timestamp}</span>
                 <h4
                   className={cn(
                     'font-display text-lg font-medium tracking-tight',
@@ -88,19 +94,27 @@ export function MissionOverviewSection() {
         </FadeIn>
 
         <FadeIn className="mt-32" delay={0.2}>
-          <div className="grid grid-cols-2 gap-12 border-t border-border-subtle pt-16 lg:grid-cols-4">
-            {MISSION_STATISTICS.map((stat) => (
-              <div key={stat.id} className="text-center lg:text-left">
-                <p className="text-stat-massive text-[clamp(2.5rem,6vw,4rem)] text-text-primary">
-                  <AnimatedCounter value={stat.value} decimals={stat.value % 1 ? 1 : 0} />
-                  <span className="text-xl text-text-muted">{stat.unit}</span>
-                </p>
-                <p className="text-label mt-4">{stat.label}</p>
-              </div>
+          <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
+            {MISSION_STATISTICS.map((stat, i) => (
+              <TiltCard key={stat.id}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08, duration: 0.8, ease: EASE_PREMIUM }}
+                  className="landing-glass landing-glass-hover rounded-xl p-8 text-center lg:text-left"
+                >
+                  <p className="text-stat-massive text-[clamp(2.5rem,6vw,4rem)] text-text-primary">
+                    <AnimatedCounter value={stat.value} decimals={stat.value % 1 ? 1 : 0} />
+                    <span className="text-xl text-text-muted">{stat.unit}</span>
+                  </p>
+                  <p className="text-label mt-4">{stat.label}</p>
+                </motion.div>
+              </TiltCard>
             ))}
           </div>
         </FadeIn>
       </div>
-    </section>
+    </LandingSectionShell>
   );
 }

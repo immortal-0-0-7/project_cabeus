@@ -3,7 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/common/Button';
-import { FadeIn, SectionHeading } from '@/components/motion';
+import { LandingSectionShell } from '@/components/landing/LandingSectionShell';
+import { FadeIn, Magnet, SectionHeading, TiltCard } from '@/components/motion';
 import { LayerCompareSlider } from '@/features/analysis/components/LayerCompareSlider';
 import { SyntheticLayerView } from '@/features/analysis/components/SyntheticLayerView';
 import { ANALYSIS_LAYERS } from '@/features/analysis/constants';
@@ -28,7 +29,7 @@ export function AIDetectionShowcaseSection() {
   const prevLayer = LAYER_SEQUENCE[Math.max(0, activeIndex - 1)];
 
   return (
-    <section id="detection" className="relative px-8 py-32 md:px-12 md:py-48 lg:px-16">
+    <LandingSectionShell id="detection" className="px-8 py-32 md:px-12 md:py-48 lg:px-16">
       <div className="relative mx-auto max-w-5xl">
         <SectionHeading
           label="03 — AI Detection"
@@ -36,17 +37,17 @@ export function AIDetectionShowcaseSection() {
           subtitle="Interactive comparison across the full detection pipeline."
         />
 
-        <FadeIn className="mt-16 flex flex-wrap justify-center gap-8 border-b border-border-subtle pb-8">
+        <FadeIn className="mt-16 flex flex-wrap justify-center gap-4" delay={0.05}>
           {LAYER_SEQUENCE.map((layer) => (
             <button
               key={layer.id}
               type="button"
               onClick={() => setActiveLayer(layer.id)}
               className={cn(
-                'font-mono text-[11px] tracking-[0.12em] uppercase transition-colors duration-500',
+                'rounded-full px-5 py-2 font-mono text-[11px] tracking-[0.12em] uppercase transition-all duration-500',
                 activeLayer === layer.id
-                  ? 'text-text-primary'
-                  : 'text-text-muted hover:text-text-secondary',
+                  ? 'landing-glass border-ice-glow text-text-primary glow-ice'
+                  : 'text-text-muted hover:bg-white/4 hover:text-text-secondary',
               )}
             >
               {layer.label}
@@ -65,7 +66,8 @@ export function AIDetectionShowcaseSection() {
         </FadeIn>
 
         <FadeIn className="mt-12" delay={0.1}>
-          <div className="overflow-hidden">
+          <TiltCard className="overflow-hidden rounded-xl">
+            <div className="landing-glass overflow-hidden">
             <AnimatePresence mode="wait">
               {compareMode ? (
                 <motion.div
@@ -101,20 +103,21 @@ export function AIDetectionShowcaseSection() {
                 </motion.div>
               )}
             </AnimatePresence>
-          </div>
+            </div>
+          </TiltCard>
         </FadeIn>
 
-        <FadeIn className="mt-12 grid grid-cols-5 gap-px bg-border-subtle" delay={0.15}>
+        <FadeIn className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-5" delay={0.15}>
           {ANALYSIS_LAYERS.map((layer) => (
-            <button
-              key={layer.id}
-              type="button"
-              onClick={() => setActiveLayer(layer.id)}
-              className={cn(
-                'bg-space-void text-left transition-opacity duration-500',
-                activeLayer === layer.id ? 'opacity-100' : 'opacity-50 hover:opacity-80',
-              )}
-            >
+            <TiltCard key={layer.id}>
+              <button
+                type="button"
+                onClick={() => setActiveLayer(layer.id)}
+                className={cn(
+                  'landing-glass landing-glass-hover w-full overflow-hidden rounded-lg text-left transition-opacity duration-500',
+                  activeLayer === layer.id ? 'opacity-100 glow-mission' : 'opacity-60 hover:opacity-90',
+                )}
+              >
               <div className="aspect-square">
                 <SyntheticLayerView layer={layer.id} />
               </div>
@@ -124,18 +127,21 @@ export function AIDetectionShowcaseSection() {
                   {layer.metricValue}{layer.metricUnit}
                 </p>
               </div>
-            </button>
+              </button>
+            </TiltCard>
           ))}
         </FadeIn>
 
         <FadeIn className="mt-16 flex justify-center" delay={0.2}>
-          <Link to={ROUTES.aiAnalysis}>
+          <Magnet>
+            <Link to={ROUTES.aiAnalysis}>
             <Button size="lg" rightIcon={<ArrowRight className="size-4 opacity-60" strokeWidth={1.5} />}>
               Open Analysis Workspace
             </Button>
-          </Link>
+            </Link>
+          </Magnet>
         </FadeIn>
       </div>
-    </section>
+    </LandingSectionShell>
   );
 }

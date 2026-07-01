@@ -43,44 +43,62 @@ export function LandingNav() {
 
   return (
     <motion.header
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1.2, ease: EASE_PREMIUM }}
+      initial={{ opacity: 0, y: -12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, ease: EASE_PREMIUM }}
       className={cn(
         'pointer-events-auto fixed inset-x-0 top-0 z-50 transition-all duration-700',
-        scrolled && 'glass',
+        scrolled ? 'landing-glass border-b border-white/6' : 'bg-transparent',
       )}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-6 md:px-12 md:py-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-5 md:px-12 md:py-6">
         <button
           type="button"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="font-display text-sm font-semibold tracking-[0.28em] text-text-primary uppercase transition-opacity duration-500 hover:opacity-60"
+          className="group flex items-center gap-3 transition-opacity duration-500 hover:opacity-80"
         >
-          Cabeus
+          <div className="relative flex size-8 items-center justify-center rounded-lg border border-ice-glow bg-ice/8">
+            <span className="font-mono text-[10px] text-ice-bright">C2</span>
+          </div>
+          <span className="font-display text-sm font-semibold tracking-[0.28em] text-text-primary uppercase">
+            Cabeus
+          </span>
         </button>
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="hidden items-center gap-1 lg:flex">
           {NAV_LINKS.map((link) => (
             <button
               key={link.id}
               type="button"
               onClick={() => scrollTo(link.id)}
               className={cn(
-                'font-mono text-[11px] tracking-[0.12em] uppercase transition-colors duration-500',
+                'relative px-4 py-2 font-mono text-[11px] tracking-[0.12em] uppercase transition-colors duration-500',
                 active === link.id
                   ? 'text-text-primary'
                   : 'text-text-muted hover:text-text-secondary',
               )}
             >
-              {link.label}
+              {active === link.id && (
+                <motion.span
+                  layoutId="landing-nav-active"
+                  className="absolute inset-0 rounded-md border border-ice-glow bg-ice/8"
+                  transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                />
+              )}
+              <span className="relative">{link.label}</span>
             </button>
           ))}
         </nav>
 
-        <span className="font-mono text-[10px] tracking-[0.16em] text-text-muted uppercase">
-          Nominal
-        </span>
+        <div className="flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-3 py-1.5 backdrop-blur-xl">
+          <span className="relative flex size-2">
+            <span className="absolute inline-flex size-full animate-ping rounded-full bg-signal opacity-60" />
+            <span className="relative inline-flex size-2 rounded-full bg-signal" />
+          </span>
+          <span className="font-mono text-[10px] tracking-[0.14em] text-text-secondary uppercase">
+            Nominal
+          </span>
+        </div>
       </div>
     </motion.header>
   );
