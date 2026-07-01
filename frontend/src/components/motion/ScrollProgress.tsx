@@ -7,7 +7,7 @@ export function ScrollProgress() {
   return (
     <motion.div
       aria-hidden
-      className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-px w-full origin-left bg-linear-to-r from-ice via-mission to-cinematic"
+      className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-px w-full origin-left bg-gradient-progress"
       style={{ scaleX }}
     />
   );

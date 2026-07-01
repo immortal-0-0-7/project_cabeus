@@ -104,9 +104,10 @@ export function MissionControlSequence({
           />
           <defs>
             <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#4d8cff" />
-              <stop offset="50%" stopColor="#67d8ff" />
-              <stop offset="100%" stopColor="#34d399" />
+              <stop offset="0%" stopColor="#3B82F6" />
+              <stop offset="45%" stopColor="#6366F1" />
+              <stop offset="78%" stopColor="#F97316" />
+              <stop offset="100%" stopColor="#EF4444" />
             </linearGradient>
           </defs>
         </svg>
@@ -231,7 +232,7 @@ export function MissionControlSequence({
                   >
                     <div className="h-0.5 overflow-hidden rounded-full bg-white/8">
                       <motion.div
-                        className="h-full rounded-full bg-gradient-to-r from-mission to-ice"
+                        className="h-full rounded-full bg-gradient-progress"
                         style={{ width: `${progress}%` }}
                       />
                     </div>

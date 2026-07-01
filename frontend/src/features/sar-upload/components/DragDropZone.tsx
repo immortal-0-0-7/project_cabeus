@@ -154,7 +154,7 @@ export function DragDropZone({
             </div>
             <div className="relative h-1.5 overflow-hidden rounded-full bg-white/8">
               <motion.div
-                className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-mission via-ice to-signal"
+                className="absolute inset-y-0 left-0 rounded-full bg-gradient-progress"
                 style={{ width: `${uploadProgress}%` }}
                 layout
               />

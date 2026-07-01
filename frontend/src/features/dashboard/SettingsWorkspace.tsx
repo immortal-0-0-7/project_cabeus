@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/common/Badge';
+import { DisplayHeading } from '@/components/common/DisplayHeading';
 import { cn } from '@/utils/cn';
 import { staggerContainer, fadeUp } from '@/utils/motion';
 
@@ -37,9 +38,12 @@ export function SettingsWorkspace() {
     >
       <motion.div variants={fadeUp} className="mb-12">
         <Badge color="ice">Configuration</Badge>
-        <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-semibold tracking-[-0.03em] text-text-primary">
+        <DisplayHeading
+          accent="warm"
+          className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-semibold tracking-[-0.03em] text-text-primary"
+        >
           Settings
-        </h2>
+        </DisplayHeading>
         <p className="mt-3 text-lg font-light text-text-secondary">
           Mission Control platform preferences
         </p>

@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/common/Button';
 import { LandingSectionShell } from '@/components/landing/LandingSectionShell';
-import { FadeIn, Magnet, SectionHeading, TiltCard } from '@/components/motion';
+import { FadeIn, SectionHeading } from '@/components/motion';
 import { ExplainabilityPanel } from '@/features/explainability/components/ExplainabilityPanel';
 import { useExplainability } from '@/features/explainability/hooks/useExplainability';
 import { LandingCandidateCard } from '@/features/landing-intelligence/components/LandingCandidateCard';
@@ -33,41 +32,34 @@ export function ExplainableAISection() {
           subtitle="Every AI-selected hotspot opens with supporting evidence, confidence scoring, and scientific reasoning."
         />
 
-        <FadeIn className="mt-16 space-y-4" delay={0.1}>
+        <FadeIn className="mt-16 space-y-3" delay={0.1}>
           {candidates.slice(0, 4).map((candidate, i) => (
-            <TiltCard key={candidate.id}>
-              <div className="landing-glass landing-glass-hover rounded-xl px-2">
-                <LandingCandidateCard
-                  candidate={candidate}
-                  selected={candidate.id === selectedId}
-                  index={i}
-                  onSelect={handleSelect}
-                />
-              </div>
-            </TiltCard>
+            <div key={candidate.id} className="border border-border-subtle px-2 transition-colors duration-500 hover:border-white/10">
+              <LandingCandidateCard
+                candidate={candidate}
+                selected={candidate.id === selectedId}
+                index={i}
+                onSelect={handleSelect}
+              />
+            </div>
           ))}
         </FadeIn>
 
-        <FadeIn className="mt-16 flex flex-col items-center gap-6 sm:flex-row sm:justify-center" delay={0.15}>
-          <Magnet>
-            <Button
-              size="lg"
-              className="glow-mission"
-              onClick={() => {
-                setPanelCandidate(selected ?? candidates[0]);
-                open();
-              }}
-            >
-              Analyze Selected Hotspot
+        <FadeIn className="mt-16 flex flex-col gap-4 sm:flex-row sm:items-center" delay={0.15}>
+          <Button
+            size="lg"
+            onClick={() => {
+              setPanelCandidate(selected ?? candidates[0]);
+              open();
+            }}
+          >
+            Analyze Selected Hotspot
+          </Button>
+          <Link to={ROUTES.landingIntelligence}>
+            <Button variant="ghost" size="lg">
+              Full Explainability Suite
             </Button>
-          </Magnet>
-          <Magnet>
-            <Link to={ROUTES.landingIntelligence}>
-              <Button variant="ghost" size="lg" rightIcon={<ArrowRight className="size-4 opacity-60" strokeWidth={1.5} />}>
-                Full Explainability Suite
-              </Button>
-            </Link>
-          </Magnet>
+          </Link>
         </FadeIn>
 
         <div className="relative mt-16">

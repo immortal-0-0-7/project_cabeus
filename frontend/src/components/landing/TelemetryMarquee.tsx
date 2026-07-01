@@ -3,22 +3,22 @@ import { FadeIn } from '@/components/motion';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 const TELEMETRY = [
-  'CHANDRAYAAN-2 DFSAR',
-  'L-BAND PENETRATION 4.8M',
-  'PSR MAPPING ACTIVE',
-  'ICE CONFIDENCE 87.4%',
-  'SHACKLETON RIM ALPHA',
+  'PASS ID: C2-SAR-2024-1847',
+  'ACQ: 2024-09-14T06:41:22Z',
+  'LAT: 89.54°S',
+  'LON: 32.67°E',
+  'FREQ: 1.25 GHz L-BAND',
+  'INCIDENCE: 35.2°',
+  'RES: 5m/px',
+  'PROCESSING: LEVEL-2A',
+  'SNR: 18.3 dB',
+  'PENETRATION: 4.8m',
   'SOUTH POLAR SWATH',
-  'MISSION ID C2-SAR-ICE-2026',
-  'TERRAIN STABILITY 91.8%',
-  'SEGMENTATION IoU 91.7%',
-  'LANDING SCORE 94.2%',
-  'ROVER SIMULATION READY',
-  'PERMANENTLY SHADOWED REGIONS',
-  'SUBSURFACE VOLATILE DETECTION',
-  'BAYESIAN ICE PROBABILITY',
-  'MULTI-CRITERIA SITE RANKING',
-  'EXPLAINABLE AI ONLINE',
+  'SHACKLETON RIM',
+  'DFSAR CALIBRATED',
+  'PSR MAPPING ACTIVE',
+  'SIGNAL QUALITY: 94.2%',
+  'TERRAIN STABILITY: 91.8%',
 ] as const;
 
 const BASE_SPEED = 24;
@@ -55,7 +55,7 @@ function MarqueeRow({
       {doubled.map((item, i) => (
         <span
           key={`${item}-${i}`}
-          className="shrink-0 whitespace-nowrap font-mono text-[11px] tracking-[0.2em] text-text-muted uppercase"
+          className="shrink-0 whitespace-nowrap font-mono text-[11px] tracking-[0.14em] text-text-muted uppercase"
         >
           {item}
         </span>

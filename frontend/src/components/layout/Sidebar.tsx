@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Moon, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { SidebarNavItem } from '@/components/layout/SidebarNavItem';
 import { IconButton } from '@/components/common/IconButton';
 import { DASHBOARD_NAV } from '@/types/navigation';
@@ -14,6 +14,7 @@ export function Sidebar() {
   const isMobile = useIsMobile();
 
   const closeMobile = () => setSidebarMobileOpen(false);
+  const showLabels = isMobile ? sidebarMobileOpen : true;
 
   return (
     <>
@@ -32,26 +33,37 @@ export function Sidebar() {
 
       <motion.aside
         className={cn(
-          'fixed left-0 top-0 z-50 flex h-dvh w-(--spacing-rail) flex-col',
-          'border-r border-border-subtle',
-          isMobile && !sidebarMobileOpen && '-translate-x-full',
-          isMobile && sidebarMobileOpen && 'translate-x-0 w-64 glass-strong',
+          'fixed left-0 top-0 z-50 flex h-dvh flex-col border-r border-border-subtle glass-strong',
+          isMobile
+            ? cn('w-64', !sidebarMobileOpen && '-translate-x-full')
+            : 'w-(--spacing-sidebar)',
         )}
         initial={false}
       >
-        <div className="flex h-(--spacing-topbar) shrink-0 items-center justify-center">
+        <div className="flex h-(--spacing-topbar) shrink-0 items-center gap-3 px-4">
           <Link
             to={ROUTES.home}
-            className="flex size-10 items-center justify-center transition-opacity duration-500 hover:opacity-70"
+            className="flex size-10 shrink-0 items-center justify-center transition-opacity duration-500 hover:opacity-70"
             aria-label="Project Cabeus home"
           >
-            <Moon className="size-5 text-text-secondary" strokeWidth={1.25} />
+            <span className="font-display text-base font-bold tracking-tight text-text-secondary">C</span>
           </Link>
+
+          {showLabels && (
+            <div className="min-w-0">
+              <p className="truncate font-display text-sm font-semibold tracking-tight text-text-primary">
+                Cabeus
+              </p>
+              <p className="truncate font-mono text-[9px] tracking-[0.14em] text-text-muted uppercase">
+                Mission Control
+              </p>
+            </div>
+          )}
 
           {isMobile && (
             <IconButton
               label="Close navigation"
-              className="absolute right-3"
+              className="ml-auto"
               onClick={closeMobile}
             >
               <X className="size-4" />
@@ -59,13 +71,13 @@ export function Sidebar() {
           )}
         </div>
 
-        <nav className="flex flex-1 flex-col px-2 py-6" aria-label="Mission navigation">
+        <nav className="flex flex-1 flex-col px-3 py-6" aria-label="Mission navigation">
           <ul className="space-y-1">
             {DASHBOARD_NAV.map((item, index) => (
               <SidebarNavItem
                 key={item.id}
                 item={item}
-                collapsed={!isMobile}
+                collapsed={!showLabels}
                 index={index}
                 onNavigate={isMobile ? closeMobile : undefined}
               />
@@ -74,12 +86,12 @@ export function Sidebar() {
         </nav>
 
         {!isMobile && (
-          <div className="shrink-0 px-2 pb-6">
+          <div className="shrink-0 px-3 pb-6">
             <Link
               to={ROUTES.home}
-              className="flex items-center justify-center py-3 text-[10px] font-mono uppercase tracking-[0.16em] text-text-muted transition-colors duration-500 hover:text-text-secondary"
+              className="flex items-center gap-2 px-3 py-3 text-[10px] font-mono uppercase tracking-[0.16em] text-text-muted transition-colors duration-500 hover:text-text-secondary"
             >
-              Exit
+              Exit Mission
             </Link>
           </div>
         )}

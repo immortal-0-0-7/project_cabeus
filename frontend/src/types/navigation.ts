@@ -1,20 +1,10 @@
-import type { LucideIcon } from 'lucide-react';
-import {
-  BrainCircuit,
-  FileText,
-  LayoutDashboard,
-  MapPin,
-  Rocket,
-  ScanSearch,
-  Settings,
-} from 'lucide-react';
 import { ROUTES } from '@/routes/paths';
 
 export interface NavItem {
   id: string;
   label: string;
   path: string;
-  icon: LucideIcon;
+  code: string;
   description: string;
 }
 
@@ -23,49 +13,49 @@ export const DASHBOARD_NAV: NavItem[] = [
     id: 'overview',
     label: 'Mission Overview',
     path: ROUTES.dashboard,
-    icon: LayoutDashboard,
+    code: '01',
     description: 'Active missions and telemetry summary',
   },
   {
     id: 'sar-upload',
     label: 'SAR Upload',
     path: ROUTES.sarAnalysis,
-    icon: ScanSearch,
+    code: '02',
     description: 'Chandrayaan-2 SAR imagery ingestion',
   },
   {
     id: 'ai-analysis',
     label: 'AI Analysis',
     path: ROUTES.aiAnalysis,
-    icon: BrainCircuit,
+    code: '03',
     description: 'Neural subsurface ice inference pipeline',
   },
   {
     id: 'landing-intelligence',
     label: 'Landing Intelligence',
     path: ROUTES.landingIntelligence,
-    icon: MapPin,
+    code: '04',
     description: 'Site scoring and risk assessment',
   },
   {
     id: 'simulation',
     label: 'Mission Simulation',
     path: ROUTES.simulation,
-    icon: Rocket,
+    code: '05',
     description: 'Virtual rover deployment and telemetry',
   },
   {
     id: 'reports',
     label: 'Reports',
     path: ROUTES.reports,
-    icon: FileText,
+    code: '06',
     description: 'Exportable mission summaries',
   },
   {
     id: 'settings',
     label: 'Settings',
     path: ROUTES.settings,
-    icon: Settings,
+    code: '07',
     description: 'Platform configuration',
   },
 ];

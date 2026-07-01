@@ -11,8 +11,6 @@ export interface SidebarNavItemProps {
 }
 
 export function SidebarNavItem({ item, collapsed, onNavigate }: SidebarNavItemProps) {
-  const Icon = item.icon;
-
   return (
     <li>
       <NavLink
@@ -32,19 +30,22 @@ export function SidebarNavItem({ item, collapsed, onNavigate }: SidebarNavItemPr
             {isActive && (
               <motion.span
                 layoutId="rail-active"
-                className="absolute left-0 top-1/2 h-4 w-px -translate-y-1/2 bg-mission"
+                className="absolute left-0 top-1/2 h-4 w-px -translate-y-1/2 bg-gradient-to-b from-electric to-deep-purple"
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               />
             )}
-            <Icon
+            <span
               className={cn(
-                'size-[18px] shrink-0 transition-colors duration-500',
-                isActive ? 'text-text-primary' : 'text-text-muted group-hover:text-text-secondary',
+                'flex size-[18px] shrink-0 items-center justify-center font-mono text-[10px] tracking-wider transition-colors duration-500',
+                isActive ? 'text-electric' : 'text-text-muted group-hover:text-text-secondary',
               )}
-              strokeWidth={1.25}
-            />
+            >
+              {item.code}
+            </span>
             {!collapsed && (
-              <span className="truncate text-sm font-medium tracking-tight">{item.label}</span>
+              <span className="min-w-0 flex-1 truncate text-sm font-medium tracking-tight">
+                {item.label}
+              </span>
             )}
           </>
         )}

@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
 import { EASE_PREMIUM } from '@/utils/motion';
 
 interface ScrollIndicatorProps {
@@ -11,18 +10,19 @@ export function ScrollIndicator({ onClick }: ScrollIndicatorProps) {
     <motion.button
       type="button"
       onClick={onClick}
-      className="group flex flex-col items-center gap-3 text-text-muted transition-colors duration-500 hover:text-text-secondary"
+      className="group flex flex-col items-center gap-4 text-text-muted transition-colors duration-500 hover:text-text-secondary"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 1.4, duration: 1, ease: EASE_PREMIUM }}
       aria-label="Scroll to mission overview"
     >
-      <motion.div
-        animate={{ y: [0, 4, 0], opacity: [0.4, 0.8, 0.4] }}
-        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        <ChevronDown className="size-5" strokeWidth={1.25} />
-      </motion.div>
+      <span className="font-mono text-[10px] tracking-[0.2em] uppercase">Scroll</span>
+      <motion.span
+        className="block h-8 w-px bg-text-muted"
+        animate={{ scaleY: [0.4, 1, 0.4], opacity: [0.3, 0.7, 0.3] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+        style={{ transformOrigin: 'top' }}
+      />
     </motion.button>
   );
 }

@@ -47,7 +47,7 @@ export function LandingLoader({ onComplete }: { onComplete: () => void }) {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: EASE_PREMIUM }}
-            className="font-display text-3xl font-semibold tracking-[-0.03em] uppercase md:text-4xl"
+            className="font-display text-3xl font-bold tracking-[-0.04em] uppercase md:text-4xl"
           >
             Cabeus
           </motion.h2>
@@ -64,7 +64,7 @@ export function LandingLoader({ onComplete }: { onComplete: () => void }) {
 
           <div className="mt-16 h-px w-48 overflow-hidden bg-border-subtle">
             <motion.div
-              className="h-full bg-text-secondary"
+              className="h-full bg-gradient-progress"
               style={{ width: `${progress}%` }}
             />
           </div>

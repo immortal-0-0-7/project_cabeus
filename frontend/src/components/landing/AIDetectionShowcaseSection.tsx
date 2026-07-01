@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/common/Button';
 import { LandingSectionShell } from '@/components/landing/LandingSectionShell';
-import { FadeIn, Magnet, SectionHeading, TiltCard } from '@/components/motion';
+import { FadeIn, SectionHeading } from '@/components/motion';
 import { LayerCompareSlider } from '@/features/analysis/components/LayerCompareSlider';
 import { SyntheticLayerView } from '@/features/analysis/components/SyntheticLayerView';
 import { ANALYSIS_LAYERS } from '@/features/analysis/constants';
@@ -37,27 +36,34 @@ export function AIDetectionShowcaseSection() {
           subtitle="Interactive comparison across the full detection pipeline."
         />
 
-        <FadeIn className="mt-16 flex flex-wrap justify-center gap-4" delay={0.05}>
+        <FadeIn className="mt-16 flex flex-wrap items-center gap-6" delay={0.05}>
           {LAYER_SEQUENCE.map((layer) => (
             <button
               key={layer.id}
               type="button"
               onClick={() => setActiveLayer(layer.id)}
               className={cn(
-                'rounded-full px-5 py-2 font-mono text-[11px] tracking-[0.12em] uppercase transition-all duration-500',
+                'relative pb-2 font-mono text-[11px] tracking-[0.1em] uppercase transition-colors duration-500',
                 activeLayer === layer.id
-                  ? 'landing-glass border-ice-glow text-text-primary glow-ice'
-                  : 'text-text-muted hover:bg-white/4 hover:text-text-secondary',
+                  ? 'text-text-primary'
+                  : 'text-text-muted hover:text-text-secondary',
               )}
             >
               {layer.label}
+              {activeLayer === layer.id && (
+                <motion.span
+                  layoutId="detection-tab-active"
+                  className="absolute inset-x-0 -bottom-px h-px bg-text-primary"
+                  transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                />
+              )}
             </button>
           ))}
           <button
             type="button"
             onClick={() => setCompareMode((v) => !v)}
             className={cn(
-              'font-mono text-[11px] tracking-[0.12em] uppercase transition-colors duration-500',
+              'pb-2 font-mono text-[11px] tracking-[0.1em] uppercase transition-colors duration-500',
               compareMode ? 'text-mission' : 'text-text-muted hover:text-text-secondary',
             )}
           >
@@ -65,9 +71,8 @@ export function AIDetectionShowcaseSection() {
           </button>
         </FadeIn>
 
-        <FadeIn className="mt-12" delay={0.1}>
-          <TiltCard className="overflow-hidden rounded-xl">
-            <div className="landing-glass overflow-hidden">
+        <FadeIn className="mt-10" delay={0.1}>
+          <div className="overflow-hidden border border-border-subtle">
             <AnimatePresence mode="wait">
               {compareMode ? (
                 <motion.div
@@ -103,43 +108,39 @@ export function AIDetectionShowcaseSection() {
                 </motion.div>
               )}
             </AnimatePresence>
-            </div>
-          </TiltCard>
+          </div>
         </FadeIn>
 
-        <FadeIn className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-5" delay={0.15}>
+        <FadeIn className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-5" delay={0.15}>
           {ANALYSIS_LAYERS.map((layer) => (
-            <TiltCard key={layer.id}>
-              <button
-                type="button"
-                onClick={() => setActiveLayer(layer.id)}
-                className={cn(
-                  'landing-glass landing-glass-hover w-full overflow-hidden rounded-lg text-left transition-opacity duration-500',
-                  activeLayer === layer.id ? 'opacity-100 glow-mission' : 'opacity-60 hover:opacity-90',
-                )}
-              >
-              <div className="aspect-square">
+            <button
+              key={layer.id}
+              type="button"
+              onClick={() => setActiveLayer(layer.id)}
+              className={cn(
+                'w-full overflow-hidden text-left transition-opacity duration-500',
+                activeLayer === layer.id ? 'opacity-100' : 'opacity-40 hover:opacity-70',
+              )}
+            >
+              <div className="aspect-square border border-border-subtle">
                 <SyntheticLayerView layer={layer.id} />
               </div>
-              <div className="px-3 py-3">
+              <div className="pt-3">
                 <p className="text-label">{layer.shortLabel}</p>
                 <p className="mt-1 text-sm text-text-primary">
                   {layer.metricValue}{layer.metricUnit}
                 </p>
               </div>
-              </button>
-            </TiltCard>
+            </button>
           ))}
         </FadeIn>
 
-        <FadeIn className="mt-16 flex justify-center" delay={0.2}>
-          <Magnet>
-            <Link to={ROUTES.aiAnalysis}>
-            <Button size="lg" rightIcon={<ArrowRight className="size-4 opacity-60" strokeWidth={1.5} />}>
+        <FadeIn className="mt-16 flex justify-start" delay={0.2}>
+          <Link to={ROUTES.aiAnalysis}>
+            <Button size="lg">
               Open Analysis Workspace
             </Button>
-            </Link>
-          </Magnet>
+          </Link>
         </FadeIn>
       </div>
     </LandingSectionShell>

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/common/Badge';
+import { DisplayHeading } from '@/components/common/DisplayHeading';
 import { ExplainabilityPanel, useExplainability } from '@/features/explainability';
 import {
   LandingCandidatesPanel,
@@ -41,9 +42,11 @@ export function LandingIntelligenceWorkspace() {
     >
       <motion.div variants={fadeUp} className="mb-10">
         <Badge color="ice">Site Intelligence</Badge>
-        <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-semibold tracking-[-0.03em] text-text-primary">
+        <DisplayHeading
+          className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-semibold tracking-[-0.03em] text-text-primary"
+        >
           Landing Intelligence
-        </h2>
+        </DisplayHeading>
         <p className="mt-3 text-lg font-light text-text-secondary">
           AI-ranked landing candidates · South polar region
         </p>

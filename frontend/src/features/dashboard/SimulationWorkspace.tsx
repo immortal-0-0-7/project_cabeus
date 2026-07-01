@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/common/Badge';
+import { DisplayHeading } from '@/components/common/DisplayHeading';
 import { AnimatedCounter } from '@/components/mission-control/AnimatedCounter';
 import {
   RoverMetricCards,
@@ -23,9 +24,12 @@ export function SimulationWorkspace() {
         <Badge color="mission" pulse={isActive}>
           {isActive ? 'Traverse Active' : state.phase === 'complete' ? 'Mission Complete' : 'Mission Planning'}
         </Badge>
-        <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-semibold tracking-[-0.03em] text-text-primary">
+        <DisplayHeading
+          accent="warm"
+          className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-semibold tracking-[-0.03em] text-text-primary"
+        >
           Rover Simulation
-        </h2>
+        </DisplayHeading>
         <p className="mt-3 text-lg font-light text-text-secondary">
           Virtual Pragyan deployment · Shackleton Rim Alpha
         </p>

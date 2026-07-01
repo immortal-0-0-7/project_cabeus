@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Menu } from 'lucide-react';
 import { IconButton } from '@/components/common/IconButton';
+import { DisplayHeading } from '@/components/common/DisplayHeading';
 import { useUI } from '@/store/uiContext';
 import { useIsMobile } from '@/hooks/useMediaQuery';
 import { useLiveClock } from '@/hooks/useMissionData';
@@ -10,11 +11,13 @@ import { fadeIn } from '@/utils/motion';
 export interface TopbarProps {
   title?: string;
   subtitle?: string;
+  scrolled?: boolean;
 }
 
 export function Topbar({
   title = 'Mission Control',
   subtitle,
+  scrolled = false,
 }: TopbarProps) {
   const { toggleSidebarMobile } = useUI();
   const isMobile = useIsMobile();
@@ -26,7 +29,10 @@ export function Topbar({
       animate="visible"
       className={cn(
         'sticky top-0 z-30 flex h-(--spacing-topbar) items-center justify-between',
-        'border-b border-border-subtle px-6 lg:px-10',
+        'border-b px-6 transition-all duration-500 lg:px-10',
+        scrolled
+          ? 'border-border-default bg-space-void/95 backdrop-blur-xl'
+          : 'border-border-subtle bg-transparent',
       )}
     >
       <div className="flex min-w-0 items-center gap-4">
@@ -37,9 +43,13 @@ export function Topbar({
         )}
 
         <div className="min-w-0">
-          <h1 className="font-display text-[clamp(1.25rem,3vw,1.75rem)] font-semibold tracking-[-0.03em] text-text-primary">
+          <DisplayHeading
+            as="h1"
+            accent="cool"
+            className="font-display text-[clamp(1.25rem,3vw,1.75rem)] font-semibold tracking-[-0.03em] text-text-primary"
+          >
             {title}
-          </h1>
+          </DisplayHeading>
           {subtitle && (
             <p className="mt-0.5 truncate text-sm text-text-muted">{subtitle}</p>
           )}

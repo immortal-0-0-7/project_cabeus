@@ -183,7 +183,7 @@ export function ReportSectionPreview({ data, section }: ReportSectionPreviewProp
                   </div>
                   <div className="h-1.5 overflow-hidden rounded-full bg-white/6">
                     <div
-                      className="h-full rounded-full bg-gradient-to-r from-mission to-ice"
+                      className="h-full rounded-full bg-gradient-progress"
                       style={{ width: `${(m.value / m.max) * 100}%` }}
                     />
                   </div>

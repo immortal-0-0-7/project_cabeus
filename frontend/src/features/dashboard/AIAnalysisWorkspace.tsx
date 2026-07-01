@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { BrainCircuit, Layers3, SlidersHorizontal, Sparkles } from 'lucide-react';
 import { Badge } from '@/components/common/Badge';
+import { DisplayHeading } from '@/components/common/DisplayHeading';
 import { GlassPanel } from '@/components/common/GlassPanel';
 import {
   ANALYSIS_LAYERS,
@@ -53,9 +54,12 @@ export function AIAnalysisWorkspace() {
       <motion.div variants={fadeUp} className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <Badge color="cinematic">Neural Pipeline</Badge>
-          <h2 className="mt-2 font-display text-xl font-bold text-text-primary">
+          <DisplayHeading
+            as="h2"
+            className="mt-2 font-display text-xl font-bold text-text-primary"
+          >
             SAR Analysis
-          </h2>
+          </DisplayHeading>
           <p className="text-sm text-text-secondary">
             PyTorch ice detection v2.4 · DFSAR L-band · Shackleton region
           </p>

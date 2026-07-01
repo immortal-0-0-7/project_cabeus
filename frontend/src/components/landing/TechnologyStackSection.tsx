@@ -2,7 +2,8 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { AnimatedCounter } from '@/components/mission-control/AnimatedCounter';
 import { LandingSectionShell } from '@/components/landing/LandingSectionShell';
-import { SectionHeading, TiltCard } from '@/components/motion';
+import { SectionHeading } from '@/components/motion';
+import { cn } from '@/utils/cn';
 import { EASE_PREMIUM } from '@/utils/motion';
 
 const PIPELINE_STAGES = [
@@ -65,35 +66,36 @@ function PipelineStage({
   index: number;
 }) {
   return (
-    <TiltCard>
-      <motion.div
-        initial={{ opacity: 0, x: index % 2 === 0 ? -24 : 24 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: '-40px' }}
-        transition={{ delay: index * 0.06, duration: 0.9, ease: EASE_PREMIUM }}
-        className="landing-glass landing-glass-hover grid gap-6 rounded-xl p-6 md:grid-cols-[auto_1fr_auto] md:gap-12 md:p-8"
-      >
-        <span className="font-mono text-xs text-ice-bright">
-          {String(index + 1).padStart(2, '0')}
-        </span>
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ delay: index * 0.06, duration: 0.9, ease: EASE_PREMIUM }}
+      className={cn(
+        'grid gap-4 py-8 md:grid-cols-[3rem_1fr_auto] md:items-baseline md:gap-10 md:py-10',
+        index > 0 && 'border-t border-border-subtle',
+      )}
+    >
+      <span className="font-mono text-sm text-text-muted">
+        {String(index + 1).padStart(2, '0')}
+      </span>
 
-        <div>
-          <h3 className="font-display text-[clamp(1.25rem,2.5vw,1.75rem)] font-medium tracking-[-0.02em] text-text-primary">
-            {stage.label}
-          </h3>
-          <p className="mt-3 max-w-xl text-base font-light leading-relaxed text-text-secondary">
-            {stage.description}
-          </p>
-        </div>
+      <div>
+        <h3 className="font-display text-[clamp(1.125rem,2.5vw,1.5rem)] font-semibold tracking-[-0.02em] text-text-primary">
+          {stage.label}
+        </h3>
+        <p className="mt-2 max-w-lg text-sm font-light leading-relaxed text-text-secondary">
+          {stage.description}
+        </p>
+      </div>
 
-        <div className="text-left md:text-right">
-          <p className="text-stat-massive text-[clamp(2rem,4vw,3rem)] text-gradient-ice">
-            <AnimatedCounter value={stage.metric} decimals={stage.metric % 1 ? 1 : 0} />
-          </p>
-          <p className="text-label mt-2">{stage.metricLabel}</p>
-        </div>
-      </motion.div>
-    </TiltCard>
+      <div className="text-left md:text-right">
+        <p className="text-stat-massive text-[clamp(1.75rem,4vw,2.5rem)] text-text-primary">
+          <AnimatedCounter value={stage.metric} decimals={stage.metric % 1 ? 1 : 0} />
+        </p>
+        <p className="text-label mt-1">{stage.metricLabel}</p>
+      </div>
+    </motion.div>
   );
 }
 
@@ -117,20 +119,18 @@ export function TechnologyStackSection() {
           subtitle="Seven-stage intelligence pipeline from raw SAR to mission-ready landing recommendations."
         />
 
-        <div className="landing-divider-glow mx-auto mt-12 w-48" />
-
         <div className="relative mt-20">
           <div
             aria-hidden
-            className="absolute top-0 bottom-0 left-4 hidden w-px bg-white/6 md:block"
+            className="absolute top-0 bottom-0 left-4 hidden w-px bg-white/4 md:block"
           >
             <motion.div
-              className="w-full bg-linear-to-b from-ice via-mission to-cinematic"
+              className="w-full bg-linear-to-b from-electric via-indigo to-deep-purple"
               style={{ height: lineHeight }}
             />
           </div>
 
-          <div className="space-y-6">
+          <div>
             {PIPELINE_STAGES.map((stage, i) => (
               <PipelineStage key={stage.id} stage={stage} index={i} />
             ))}

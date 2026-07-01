@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { LunarWorkspaceMap } from '@/components/mission-control/LunarWorkspaceMap';
 import { AnimatedCounter } from '@/components/mission-control/AnimatedCounter';
+import { DisplayHeading } from '@/components/common/DisplayHeading';
 import {
   LANDING_SITES,
   MISSION_ID,
@@ -22,9 +23,11 @@ export function OverviewWorkspace() {
     >
       <motion.div variants={fadeUp} className="mb-12">
         <p className="text-label">{MISSION_ID}</p>
-        <h2 className="mt-4 font-display text-[clamp(2rem,5vw,3.5rem)] font-semibold tracking-[-0.04em] text-text-primary">
+        <DisplayHeading
+          className="mt-4 font-display text-[clamp(2rem,5vw,3.5rem)] font-semibold tracking-[-0.04em] text-text-primary"
+        >
           {MISSION_NAME}
-        </h2>
+        </DisplayHeading>
         <p className="mt-3 text-lg font-light text-text-secondary">
           {ORBITER} · South polar SAR ice intelligence
         </p>
