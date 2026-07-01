@@ -17,14 +17,14 @@ interface LandingSceneProps {
 function SceneContent({ mouse }: LandingSceneProps) {
   return (
     <>
-      <color attach="background" args={['#02040a']} />
-      <fog attach="fog" args={['#02040a', 18, 90]} />
+      <color attach="background" args={['#000000']} />
+      <fog attach="fog" args={['#000000', 18, 90]} />
       <CameraRig mouse={mouse} />
       <LightingSetup />
       <Nebula mouse={mouse} />
       <StarField />
       <FloatingParticles />
-      <Moon mouse={mouse} />
+      <Moon />
       <SceneEffects />
     </>
   );
@@ -42,7 +42,7 @@ export function LandingScene({ mouse }: LandingSceneProps) {
       }}
       onCreated={({ gl }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping;
-        gl.toneMappingExposure = 1.15;
+        gl.toneMappingExposure = 1.05;
       }}
       camera={{ position: [0, 0.35, 7.5], fov: 42, near: 0.1, far: 200 }}
     >

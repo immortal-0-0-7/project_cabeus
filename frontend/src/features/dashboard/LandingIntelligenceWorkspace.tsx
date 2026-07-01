@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion';
-import { Radar } from 'lucide-react';
 import { Badge } from '@/components/common/Badge';
-import { GlassPanel } from '@/components/common/GlassPanel';
 import { ExplainabilityPanel, useExplainability } from '@/features/explainability';
 import {
   LandingCandidatesPanel,
@@ -39,67 +37,56 @@ export function LandingIntelligenceWorkspace() {
       variants={staggerContainer}
       initial="hidden"
       animate="visible"
-      className="flex h-full min-h-0 flex-col gap-4"
+      className="flex h-full min-h-0 flex-col"
     >
-      <motion.div variants={fadeUp}>
+      <motion.div variants={fadeUp} className="mb-10">
         <Badge color="ice">Site Intelligence</Badge>
-        <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h2 className="font-display text-xl font-bold text-text-primary">
-              Landing Intelligence
-            </h2>
-            <p className="text-sm text-text-secondary">
-              AI-ranked landing candidates · Multi-criteria scoring · South polar region
-            </p>
-          </div>
-          <div className="flex items-center gap-2 rounded-lg border border-border-subtle bg-white/2 px-3 py-1.5">
-            <Radar className="size-3.5 text-ice" />
-            <span className="font-mono text-[10px] text-text-muted">
-              {isGenerating ? 'SCANNING TERRAIN...' : `${candidates.length} CANDIDATES RANKED`}
-            </span>
-          </div>
-        </div>
+        <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-semibold tracking-[-0.03em] text-text-primary">
+          Landing Intelligence
+        </h2>
+        <p className="mt-3 text-lg font-light text-text-secondary">
+          AI-ranked landing candidates · South polar region
+        </p>
+        <p className="text-label mt-2">
+          {isGenerating ? 'Scanning terrain…' : `${candidates.length} candidates ranked`}
+        </p>
       </motion.div>
 
       <LandingSummaryStrip candidates={candidates} isGenerating={isGenerating} />
 
-      <div className="grid min-h-0 flex-1 gap-4 xl:grid-cols-[1fr_420px]">
+      <div className="grid min-h-0 flex-1 gap-12 border-t border-border-subtle pt-10 xl:grid-cols-[1fr_380px]">
         <motion.div variants={fadeUp} className="relative min-h-[360px]">
-          <GlassPanel animate={false} className="flex h-full flex-col p-4">
-            {!isGenerating && candidates.length > 0 ? (
-              <div className="relative flex min-h-0 flex-1 flex-col">
-                <LandingIntelligenceMap
-                  candidates={candidates}
-                  selectedId={selectedId}
-                  onSelect={handleHotspotSelect}
-                  explainPanelOpen={explainOpen}
-                />
-                <ExplainabilityPanel
-                  candidate={selected}
-                  explainability={explainability}
-                  isOpen={explainOpen}
-                  isAnalyzing={isAnalyzing}
-                  onClose={closeExplainability}
-                />
-              </div>
-            ) : (
-              <div className="flex flex-1 items-center justify-center rounded-xl border border-border-subtle bg-space-deep">
-                <p className="text-sm text-text-muted">Initializing lunar workspace...</p>
-              </div>
-            )}
-          </GlassPanel>
+          {!isGenerating && candidates.length > 0 ? (
+            <div className="relative flex min-h-0 flex-1 flex-col">
+              <LandingIntelligenceMap
+                candidates={candidates}
+                selectedId={selectedId}
+                onSelect={handleHotspotSelect}
+                explainPanelOpen={explainOpen}
+              />
+              <ExplainabilityPanel
+                candidate={selected}
+                explainability={explainability}
+                isOpen={explainOpen}
+                isAnalyzing={isAnalyzing}
+                onClose={closeExplainability}
+              />
+            </div>
+          ) : (
+            <div className="flex flex-1 items-center justify-center py-20">
+              <p className="text-label">Initializing lunar workspace…</p>
+            </div>
+          )}
         </motion.div>
 
-        <motion.div variants={fadeUp} className="min-h-0">
-          <GlassPanel animate={false} className="flex h-full flex-col p-4">
-            <LandingCandidatesPanel
-              candidates={candidates}
-              selectedId={selectedId}
-              isGenerating={isGenerating}
-              onSelect={handleHotspotSelect}
-              onRegenerate={regenerate}
-            />
-          </GlassPanel>
+        <motion.div variants={fadeUp} className="min-h-0 border-t border-border-subtle pt-8 xl:border-t-0 xl:border-l xl:pt-0 xl:pl-10">
+          <LandingCandidatesPanel
+            candidates={candidates}
+            selectedId={selectedId}
+            isGenerating={isGenerating}
+            onSelect={handleHotspotSelect}
+            onRegenerate={regenerate}
+          />
         </motion.div>
       </div>
     </motion.div>

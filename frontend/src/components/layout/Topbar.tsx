@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { Bell, Menu, Radio } from 'lucide-react';
-import { Badge } from '@/components/common/Badge';
+import { Menu } from 'lucide-react';
 import { IconButton } from '@/components/common/IconButton';
 import { useUI } from '@/store/uiContext';
 import { useIsMobile } from '@/hooks/useMediaQuery';
@@ -15,9 +14,9 @@ export interface TopbarProps {
 
 export function Topbar({
   title = 'Mission Control',
-  subtitle = 'ISRO · Chandrayaan-2 SAR Intelligence Pipeline',
+  subtitle,
 }: TopbarProps) {
-  const { sidebarCollapsed, toggleSidebarMobile } = useUI();
+  const { toggleSidebarMobile } = useUI();
   const isMobile = useIsMobile();
 
   return (
@@ -27,47 +26,30 @@ export function Topbar({
       animate="visible"
       className={cn(
         'sticky top-0 z-30 flex h-(--spacing-topbar) items-center justify-between',
-        'border-b border-border-subtle glass px-4 lg:px-6',
+        'border-b border-border-subtle px-6 lg:px-10',
       )}
     >
-      <div className="flex items-center gap-3">
+      <div className="flex min-w-0 items-center gap-4">
         {isMobile && (
           <IconButton label="Open navigation" onClick={toggleSidebarMobile}>
             <Menu className="size-4" />
           </IconButton>
         )}
 
-        <div>
-          <h1 className="text-sm font-semibold tracking-tight text-text-primary lg:text-base">
+        <div className="min-w-0">
+          <h1 className="font-display text-[clamp(1.25rem,3vw,1.75rem)] font-semibold tracking-[-0.03em] text-text-primary">
             {title}
           </h1>
-          <p className="hidden text-xs text-text-muted sm:block">{subtitle}</p>
+          {subtitle && (
+            <p className="mt-0.5 truncate text-sm text-text-muted">{subtitle}</p>
+          )}
         </div>
       </div>
 
-      <div className="flex items-center gap-2 lg:gap-3">
-        <Badge color="mission" className="hidden sm:inline-flex">
-          <Radio className="mr-1 size-3" strokeWidth={2} />
-          Live Feed
-        </Badge>
-
-        <div className="hidden items-center gap-2 font-mono text-[11px] text-text-muted md:flex">
-          <span className="text-text-secondary">UTC</span>
+      <div className="flex shrink-0 items-center gap-6">
+        <div className="hidden items-baseline gap-2 font-mono text-xs md:flex">
+          <span className="text-label">UTC</span>
           <LiveClock />
-        </div>
-
-        <IconButton label="Notifications">
-          <Bell className="size-4" />
-        </IconButton>
-
-        <div
-          className={cn(
-            'hidden size-8 items-center justify-center rounded-full border border-ice/25 bg-ice/10 lg:flex',
-            sidebarCollapsed && 'lg:flex',
-          )}
-          aria-hidden
-        >
-          <span className="font-mono text-[10px] font-medium text-ice">ISRO</span>
         </div>
       </div>
     </motion.header>
@@ -80,8 +62,9 @@ function LiveClock() {
   return (
     <motion.span
       key={formatted}
-      initial={{ opacity: 0.5 }}
+      initial={{ opacity: 0.4 }}
       animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
       className="tabular-nums text-text-secondary"
     >
       {formatted}

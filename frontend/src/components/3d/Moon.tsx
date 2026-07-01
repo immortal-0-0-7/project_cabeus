@@ -1,48 +1,95 @@
 import { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
-import { createProceduralMoonTextures } from '@/utils/proceduralMoon';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
-interface MoonProps {
-  mouse: React.RefObject<THREE.Vector2>;
+useGLTF.preload('/models/moon.glb');
+
+const TARGET_DIAMETER = 10;
+const MOON_POSITION: [number, number, number] = [4.8, 0, 0];
+const ROTATION_SPEED = 0.065;
+
+function prepareLunarMaterial(material: THREE.Material): THREE.MeshStandardMaterial {
+  if (
+    material instanceof THREE.MeshStandardMaterial ||
+    material instanceof THREE.MeshPhysicalMaterial
+  ) {
+    material.metalness = 0;
+    material.roughness = 0.97;
+    material.color.set('#c8c8d0');
+    material.emissive.set('#0a0a10');
+    material.emissiveIntensity = 0.03;
+    if (material.map) {
+      material.map.colorSpace = THREE.SRGBColorSpace;
+    }
+    material.needsUpdate = true;
+    return material;
+  }
+
+  const source = material as THREE.MeshStandardMaterial;
+  const lunarMaterial = new THREE.MeshStandardMaterial({
+    map: source.map ?? null,
+    normalMap: source.normalMap ?? null,
+    roughnessMap: source.roughnessMap ?? null,
+    aoMap: source.aoMap ?? null,
+    color: new THREE.Color('#c8c8d0'),
+    roughness: 0.97,
+    metalness: 0,
+    emissive: new THREE.Color('#0a0a10'),
+    emissiveIntensity: 0.03,
+  });
+
+  if (lunarMaterial.map) {
+    lunarMaterial.map.colorSpace = THREE.SRGBColorSpace;
+  }
+
+  material.dispose();
+  return lunarMaterial;
 }
 
-export function Moon({ mouse }: MoonProps) {
-  const meshRef = useRef<THREE.Mesh>(null);
+export function Moon() {
+  const groupRef = useRef<THREE.Group>(null);
   const reducedMotion = useReducedMotion();
-  const textures = useMemo(() => createProceduralMoonTextures(1024), []);
+  const { scene } = useGLTF('/models/moon.glb');
+
+  const model = useMemo(() => {
+    const clone = scene.clone(true);
+    const box = new THREE.Box3().setFromObject(clone);
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scale = TARGET_DIAMETER / maxDim;
+
+    clone.position.sub(center);
+    clone.scale.setScalar(scale);
+
+    clone.traverse((child) => {
+      if (!(child instanceof THREE.Mesh)) return;
+
+      child.castShadow = true;
+      child.receiveShadow = true;
+
+      if (Array.isArray(child.material)) {
+        child.material = child.material.map(prepareLunarMaterial);
+      } else {
+        child.material = prepareLunarMaterial(child.material);
+      }
+    });
+
+    return clone;
+  }, [scene]);
 
   useFrame((_, delta) => {
-    const mesh = meshRef.current;
-    if (!mesh) return;
+    const group = groupRef.current;
+    if (!group || reducedMotion) return;
 
-    if (!reducedMotion) {
-      mesh.rotation.y += delta * 0.035;
-    }
-
-    const targetX = mouse.current.y * 0.12;
-    const targetY = mouse.current.x * 0.18;
-    mesh.rotation.x = THREE.MathUtils.lerp(mesh.rotation.x, targetX, 0.04);
-    mesh.rotation.z = THREE.MathUtils.lerp(mesh.rotation.z, -targetY, 0.04);
+    group.rotation.y += delta * ROTATION_SPEED;
   });
 
   return (
-    <mesh ref={meshRef} castShadow receiveShadow>
-      <sphereGeometry args={[2.15, 192, 192]} />
-      <meshPhysicalMaterial
-        map={textures.map}
-        normalMap={textures.normalMap}
-        roughnessMap={textures.roughnessMap}
-        displacementMap={textures.displacementMap}
-        displacementScale={0.18}
-        normalScale={new THREE.Vector2(1.4, 1.4)}
-        metalness={0.015}
-        roughness={0.92}
-        envMapIntensity={0.15}
-        clearcoat={0.04}
-        clearcoatRoughness={0.85}
-      />
-    </mesh>
+    <group ref={groupRef} position={MOON_POSITION}>
+      <primitive object={model} />
+    </group>
   );
 }

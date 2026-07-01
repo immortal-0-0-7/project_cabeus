@@ -11,15 +11,9 @@ export interface CardProps extends HTMLMotionProps<'div'> {
 
 const paddingStyles = {
   none: '',
-  sm: 'p-4',
-  md: 'p-5',
-  lg: 'p-6',
-};
-
-const glowStyles = {
-  ice: 'hover:shadow-[0_0_32px_rgb(103_216_255/0.12)]',
-  mission: 'hover:shadow-[0_0_32px_rgb(77_140_255/0.12)]',
-  none: '',
+  sm: 'p-5',
+  md: 'p-6',
+  lg: 'p-8',
 };
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
@@ -27,7 +21,6 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     {
       className,
       interactive = false,
-      glow = 'none',
       padding = 'md',
       children,
       ...props
@@ -40,14 +33,12 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       initial="hidden"
       animate="visible"
       className={cn(
-        'glass rounded-xl shadow-panel',
+        'module',
         paddingStyles[padding],
-        interactive && 'cursor-pointer transition-shadow duration-300',
-        glowStyles[glow],
+        interactive && 'cursor-pointer transition-opacity duration-500 hover:opacity-90',
         className,
       )}
-      whileHover={interactive ? { y: -2 } : undefined}
-      transition={{ duration: 0.25 }}
+      transition={{ duration: 0.5 }}
       {...props}
     >
       {children}

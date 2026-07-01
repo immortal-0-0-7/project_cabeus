@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Bell, Globe, Monitor, Moon, Shield, Sliders } from 'lucide-react';
-import { GlassPanel } from '@/components/common/GlassPanel';
 import { Badge } from '@/components/common/Badge';
 import { cn } from '@/utils/cn';
 import { staggerContainer, fadeUp } from '@/utils/motion';
@@ -35,137 +33,113 @@ export function SettingsWorkspace() {
       variants={staggerContainer}
       initial="hidden"
       animate="visible"
-      className="flex h-full min-h-0 flex-col gap-4"
+      className="flex h-full min-h-0 flex-col"
     >
-      <motion.div variants={fadeUp}>
+      <motion.div variants={fadeUp} className="mb-12">
         <Badge color="ice">Configuration</Badge>
-        <h2 className="mt-2 font-display text-xl font-bold text-text-primary">Settings</h2>
-        <p className="text-sm text-text-secondary">
-          Mission Control platform preferences and display configuration
+        <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-semibold tracking-[-0.03em] text-text-primary">
+          Settings
+        </h2>
+        <p className="mt-3 text-lg font-light text-text-secondary">
+          Mission Control platform preferences
         </p>
       </motion.div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-16 lg:grid-cols-2">
         <motion.div variants={fadeUp}>
-          <GlassPanel animate={false} className="p-5">
-            <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-text-primary">
-              <Sliders className="size-4 text-ice" />
-              Display Preferences
-            </h3>
+          <p className="text-label mb-8">Display Preferences</p>
 
-            <div className="space-y-4">
-              <div>
-                <p className="mb-2 text-xs text-text-muted">Measurement Units</p>
-                <div className="flex gap-2">
-                  {(['metric', 'imperial'] as const).map((u) => (
-                    <button
-                      key={u}
-                      type="button"
-                      onClick={() => setUnits(u)}
-                      className={cn(
-                        'flex-1 rounded-lg border px-3 py-2 text-xs font-medium capitalize transition-all',
-                        units === u
-                          ? 'border-ice/30 bg-ice/10 text-ice'
-                          : 'border-border-subtle text-text-muted hover:text-text-secondary',
-                      )}
-                    >
-                      {u}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <p className="mb-2 text-xs text-text-muted">Theme Mode</p>
-                <div className="flex gap-2">
-                  {([
-                    { id: 'dark' as const, icon: Moon, label: 'Deep Space' },
-                    { id: 'high-contrast' as const, icon: Monitor, label: 'High Contrast' },
-                  ]).map(({ id, icon: Icon, label }) => (
-                    <button
-                      key={id}
-                      type="button"
-                      onClick={() => setTheme(id)}
-                      className={cn(
-                        'flex flex-1 items-center justify-center gap-2 rounded-lg border px-3 py-2 text-xs font-medium transition-all',
-                        theme === id
-                          ? 'border-ice/30 bg-ice/10 text-ice'
-                          : 'border-border-subtle text-text-muted hover:text-text-secondary',
-                      )}
-                    >
-                      <Icon className="size-3.5" />
-                      {label}
-                    </button>
-                  ))}
-                </div>
+          <div className="space-y-10">
+            <div>
+              <p className="mb-4 text-sm text-text-secondary">Measurement Units</p>
+              <div className="flex gap-8">
+                {(['metric', 'imperial'] as const).map((u) => (
+                  <button
+                    key={u}
+                    type="button"
+                    onClick={() => setUnits(u)}
+                    className={cn(
+                      'font-mono text-xs uppercase tracking-[0.14em] transition-colors duration-500',
+                      units === u ? 'text-text-primary' : 'text-text-muted hover:text-text-secondary',
+                    )}
+                  >
+                    {u}
+                  </button>
+                ))}
               </div>
             </div>
-          </GlassPanel>
+
+            <div>
+              <p className="mb-4 text-sm text-text-secondary">Theme Mode</p>
+              <div className="flex gap-8">
+                {([
+                  { id: 'dark' as const, label: 'Deep Space' },
+                  { id: 'high-contrast' as const, label: 'High Contrast' },
+                ]).map(({ id, label }) => (
+                  <button
+                    key={id}
+                    type="button"
+                    onClick={() => setTheme(id)}
+                    className={cn(
+                      'font-mono text-xs uppercase tracking-[0.14em] transition-colors duration-500',
+                      theme === id ? 'text-text-primary' : 'text-text-muted hover:text-text-secondary',
+                    )}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         <motion.div variants={fadeUp}>
-          <GlassPanel animate={false} className="p-5">
-            <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-text-primary">
-              <Bell className="size-4 text-mission" />
-              System Toggles
-            </h3>
-            <ul className="space-y-3">
-              {toggles.map((toggle) => (
-                <li
-                  key={toggle.id}
-                  className="flex items-center justify-between gap-3 rounded-lg border border-border-subtle bg-white/2 px-3 py-2.5"
+          <p className="text-label mb-8">System Toggles</p>
+          <ul className="divide-y divide-border-subtle">
+            {toggles.map((toggle) => (
+              <li
+                key={toggle.id}
+                className="flex items-center justify-between gap-6 py-6"
+              >
+                <div>
+                  <p className="text-sm font-medium text-text-primary">{toggle.label}</p>
+                  <p className="mt-1 text-sm font-light text-text-muted">{toggle.description}</p>
+                </div>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={toggle.enabled}
+                  onClick={() => flipToggle(toggle.id)}
+                  className={cn(
+                    'relative h-5 w-9 shrink-0 transition-colors duration-500',
+                    toggle.enabled ? 'bg-mission/40' : 'bg-white/8',
+                  )}
                 >
-                  <div>
-                    <p className="text-xs font-medium text-text-primary">{toggle.label}</p>
-                    <p className="text-[10px] text-text-muted">{toggle.description}</p>
-                  </div>
-                  <button
-                    type="button"
-                    role="switch"
-                    aria-checked={toggle.enabled}
-                    onClick={() => flipToggle(toggle.id)}
-                    className={cn(
-                      'relative h-5 w-9 shrink-0 rounded-full transition-colors duration-200',
-                      toggle.enabled ? 'bg-ice/40' : 'bg-white/10',
-                    )}
-                  >
-                    <motion.span
-                      className="absolute top-0.5 size-4 rounded-full bg-white shadow-sm"
-                      animate={{ left: toggle.enabled ? '18px' : '2px' }}
-                      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                    />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </GlassPanel>
+                  <motion.span
+                    className="absolute top-0.5 size-4 bg-text-primary"
+                    animate={{ left: toggle.enabled ? '18px' : '2px' }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  />
+                </button>
+              </li>
+            ))}
+          </ul>
         </motion.div>
 
         <motion.div variants={fadeUp} className="lg:col-span-2">
-          <GlassPanel animate={false} className="p-5">
-            <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-text-primary">
-              <Shield className="size-4 text-signal" />
-              Mission Control Access
-            </h3>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {[
-                { icon: Globe, label: 'DSN Endpoint', value: 'dsn14.isro.gov.in' },
-                { icon: Shield, label: 'Security Level', value: 'CLASSIFIED-INTERNAL' },
-                { icon: Moon, label: 'Mission ID', value: 'C2-SAR-ICE-2026' },
-              ].map(({ icon: Icon, label, value }) => (
-                <div
-                  key={label}
-                  className="rounded-lg border border-border-subtle bg-white/2 px-4 py-3"
-                >
-                  <div className="flex items-center gap-2">
-                    <Icon className="size-3.5 text-text-muted" />
-                    <span className="text-[10px] text-text-muted">{label}</span>
-                  </div>
-                  <p className="mt-1 font-mono text-xs text-text-primary">{value}</p>
-                </div>
-              ))}
-            </div>
-          </GlassPanel>
+          <p className="text-label mb-8">Mission Control Access</p>
+          <div className="grid gap-10 border-t border-border-subtle pt-10 sm:grid-cols-3">
+            {[
+              { label: 'DSN Endpoint', value: 'dsn14.isro.gov.in' },
+              { label: 'Security Level', value: 'CLASSIFIED-INTERNAL' },
+              { label: 'Mission ID', value: 'C2-SAR-ICE-2026' },
+            ].map(({ label, value }) => (
+              <div key={label}>
+                <p className="text-label">{label}</p>
+                <p className="mt-2 font-mono text-sm text-text-primary">{value}</p>
+              </div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </motion.div>

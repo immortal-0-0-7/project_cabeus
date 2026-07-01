@@ -1,33 +1,74 @@
-import { motion } from 'framer-motion';
+import { useCallback, useRef, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { LandingScene } from '@/components/3d/LandingScene';
-import { HeroOverlay } from '@/components/landing/HeroOverlay';
+import { AIDetectionShowcaseSection } from '@/components/landing/AIDetectionShowcaseSection';
+import { ExplainableAISection } from '@/components/landing/ExplainableAISection';
+import { HeroSection } from '@/components/landing/HeroSection';
+import { LandingFooter } from '@/components/landing/LandingFooter';
+import { LandingIntelligenceSection } from '@/components/landing/LandingIntelligenceSection';
+import { LandingLoader } from '@/components/landing/LandingLoader';
+import { LandingNav } from '@/components/landing/LandingNav';
+import { MissionOverviewSection } from '@/components/landing/MissionOverviewSection';
+import { MissionReportSection } from '@/components/landing/MissionReportSection';
+import { MissionSimulationSection } from '@/components/landing/MissionSimulationSection';
+import { TelemetryMarquee } from '@/components/landing/TelemetryMarquee';
+import { TechnologyStackSection } from '@/components/landing/TechnologyStackSection';
 import { useMouseRef } from '@/hooks/useMouseRef';
+import { EASE_PREMIUM } from '@/utils/motion';
 
 export function LandingPage() {
   const mouse = useMouseRef();
+  const mainRef = useRef<HTMLElement>(null);
+  const [loaded, setLoaded] = useState(false);
+  const [loaderDone, setLoaderDone] = useState(false);
+
+  const handleLoaderComplete = useCallback(() => setLoaderDone(true), []);
+
+  const { scrollYProgress } = useScroll({
+    target: mainRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const sceneOpacity = useTransform(scrollYProgress, [0, 0.4, 0.65], [1, 0.5, 0]);
+  const sceneScale = useTransform(scrollYProgress, [0, 0.55], [1, 1.06]);
 
   return (
-    <motion.main
-      className="relative h-dvh w-full overflow-hidden bg-space-void"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-    >
-      <div className="absolute inset-0">
-        <LandingScene mouse={mouse} />
-      </div>
+    <>
+      {!loaderDone && <LandingLoader onComplete={handleLoaderComplete} />}
 
-      <div className="noise-overlay pointer-events-none absolute inset-0 z-20 opacity-30 mix-blend-overlay" />
-      <HeroOverlay />
+      <motion.main
+        ref={mainRef}
+        className="relative bg-space-void"
+        style={{ overflowX: 'clip' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: loaderDone ? 1 : 0 }}
+        transition={{ duration: 1.2, ease: EASE_PREMIUM }}
+        onAnimationComplete={() => setLoaded(true)}
+      >
+        <motion.div
+          className="pointer-events-none fixed inset-0 z-0"
+          style={{ opacity: sceneOpacity, scale: sceneScale }}
+        >
+          {loaded && <LandingScene mouse={mouse} />}
+        </motion.div>
 
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-5"
-        style={{
-          background:
-            'radial-gradient(ellipse 50% 40% at 50% 50%, transparent 30%, rgb(2 4 10 / 0.55) 100%)',
-        }}
-      />
-    </motion.main>
+        <div className="noise-overlay pointer-events-none fixed inset-0 z-1 opacity-20" />
+        <div className="vignette pointer-events-none fixed inset-0 z-2" />
+
+        <div className="relative z-10">
+          <LandingNav />
+          <HeroSection />
+          <TelemetryMarquee />
+          <MissionOverviewSection />
+          <TechnologyStackSection />
+          <AIDetectionShowcaseSection />
+          <LandingIntelligenceSection />
+          <ExplainableAISection />
+          <MissionSimulationSection />
+          <MissionReportSection />
+          <LandingFooter />
+        </div>
+      </motion.main>
+    </>
   );
 }

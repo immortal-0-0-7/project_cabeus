@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion';
-import { Orbit, Radio } from 'lucide-react';
 import { Badge } from '@/components/common/Badge';
-import { GlassPanel } from '@/components/common/GlassPanel';
 import { AnimatedCounter } from '@/components/mission-control/AnimatedCounter';
 import {
   RoverMetricCards,
@@ -19,45 +17,37 @@ export function SimulationWorkspace() {
       variants={staggerContainer}
       initial="hidden"
       animate="visible"
-      className="flex h-full min-h-0 flex-col gap-4"
+      className="flex h-full min-h-0 flex-col"
     >
-      <motion.div variants={fadeUp} className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <Badge color="mission" pulse={isActive}>
-            {isActive ? 'Traverse Active' : state.phase === 'complete' ? 'Mission Complete' : 'Mission Planning'}
-          </Badge>
-          <h2 className="mt-2 font-display text-xl font-bold text-text-primary">
-            Rover Simulation
-          </h2>
-          <p className="text-sm text-text-secondary">
-            Virtual Pragyan deployment · Shackleton Rim Alpha · Path planning & telemetry
-          </p>
-        </div>
+      <motion.div variants={fadeUp} className="mb-10">
+        <Badge color="mission" pulse={isActive}>
+          {isActive ? 'Traverse Active' : state.phase === 'complete' ? 'Mission Complete' : 'Mission Planning'}
+        </Badge>
+        <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-semibold tracking-[-0.03em] text-text-primary">
+          Rover Simulation
+        </h2>
+        <p className="mt-3 text-lg font-light text-text-secondary">
+          Virtual Pragyan deployment · Shackleton Rim Alpha
+        </p>
 
-        <div className="flex flex-wrap items-center gap-2">
-          <GlassPanel animate={false} className="flex items-center gap-2.5 px-4 py-2">
-            <Orbit className="size-4 text-mission" />
-            <div>
-              <p className="font-mono text-[9px] uppercase tracking-widest text-text-muted">Sim Time</p>
-              <p className="font-mono text-lg font-semibold text-ice">
-                T+<AnimatedCounter value={state.simTimeMin} decimals={0} suffix=" min" />
-              </p>
-            </div>
-          </GlassPanel>
-          <GlassPanel animate={false} className="flex items-center gap-2.5 px-4 py-2">
-            <Radio className={`size-4 ${isActive ? 'text-signal' : 'text-text-muted'}`} />
-            <div>
-              <p className="font-mono text-[9px] uppercase tracking-widest text-text-muted">Link</p>
-              <p className={`font-mono text-sm font-semibold ${isActive ? 'text-signal' : 'text-text-secondary'}`}>
-                {isActive ? 'NOMINAL' : 'STANDBY'}
-              </p>
-            </div>
-          </GlassPanel>
+        <div className="mt-8 flex flex-wrap gap-12 border-t border-border-subtle pt-8">
+          <div>
+            <p className="text-label">Sim Time</p>
+            <p className="mt-2 font-display text-2xl font-medium text-text-primary">
+              T+<AnimatedCounter value={state.simTimeMin} decimals={0} suffix=" min" />
+            </p>
+          </div>
+          <div>
+            <p className="text-label">Link</p>
+            <p className="mt-2 font-display text-2xl font-medium text-text-primary">
+              {isActive ? 'Nominal' : 'Standby'}
+            </p>
+          </div>
         </div>
       </motion.div>
 
-      <motion.div variants={fadeUp} className="grid min-h-0 flex-1 gap-4 xl:grid-cols-[1fr_1fr]">
-        <GlassPanel animate={false} className="flex min-h-[420px] flex-col p-4">
+      <motion.div variants={fadeUp} className="grid min-h-0 flex-1 gap-12 border-t border-border-subtle pt-10 xl:grid-cols-2">
+        <div className="min-h-[420px]">
           <RoverMissionMap
             roverPosition={state.roverPosition}
             path={state.path}
@@ -72,37 +62,16 @@ export function SimulationWorkspace() {
             onResume={resume}
             onReset={reset}
           />
-        </GlassPanel>
+        </div>
 
-        <GlassPanel animate={false} className="flex min-h-[420px] flex-col overflow-hidden p-4">
-          <div className="mb-4 flex items-center justify-between">
-            <div>
-              <h3 className="text-sm font-semibold text-text-primary">Mission Telemetry</h3>
-              <p className="text-[11px] text-text-muted">Live metrics · Predictive scoring</p>
-            </div>
-            {state.phase !== 'idle' && (
-              <motion.div
-                className="flex items-center gap-1.5 rounded-md border border-border-subtle bg-white/2 px-2 py-1"
-                animate={isActive ? { borderColor: 'rgb(103 216 255 / 0.3)' } : {}}
-              >
-                <span
-                  className={`size-1.5 rounded-full ${isActive ? 'animate-pulse bg-ice' : 'bg-text-muted'}`}
-                />
-                <span className="font-mono text-[9px] text-text-muted">
-                  {isActive ? 'STREAMING' : 'SNAPSHOT'}
-                </span>
-              </motion.div>
-            )}
-          </div>
-
-          <div className="min-h-0 flex-1 overflow-y-auto pr-1">
-            <RoverMetricCards
-              metrics={state.metrics}
-              history={state.history}
-              isActive={isActive}
-            />
-          </div>
-        </GlassPanel>
+        <div className="min-h-[420px] overflow-y-auto border-t border-border-subtle pt-8 xl:border-t-0 xl:border-l xl:pt-0 xl:pl-10">
+          <p className="text-label mb-6">Mission Telemetry</p>
+          <RoverMetricCards
+            metrics={state.metrics}
+            history={state.history}
+            isActive={isActive}
+          />
+        </div>
       </motion.div>
     </motion.div>
   );

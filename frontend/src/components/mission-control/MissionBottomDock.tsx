@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Activity, Clock, Terminal } from 'lucide-react';
 import { MissionTimeline } from '@/components/mission-control/MissionTimeline';
 import { MissionStatistics } from '@/components/mission-control/MissionStatistics';
 import { MissionLogs } from '@/components/mission-control/MissionLogs';
@@ -10,10 +9,10 @@ import { fadeIn } from '@/utils/motion';
 
 type DockTab = 'timeline' | 'stats' | 'logs';
 
-const tabs: { id: DockTab; label: string; icon: typeof Clock }[] = [
-  { id: 'timeline', label: 'Timeline', icon: Clock },
-  { id: 'stats', label: 'Statistics', icon: Activity },
-  { id: 'logs', label: 'Logs', icon: Terminal },
+const tabs: { id: DockTab; label: string }[] = [
+  { id: 'timeline', label: 'Timeline' },
+  { id: 'stats', label: 'Statistics' },
+  { id: 'logs', label: 'Logs' },
 ];
 
 export function MissionBottomDock() {
@@ -26,11 +25,10 @@ export function MissionBottomDock() {
         variants={fadeIn}
         initial="hidden"
         animate="visible"
-        className="shrink-0 border-t border-border-subtle glass"
+        className="shrink-0 border-t border-border-subtle"
       >
-        <div className="flex border-b border-border-subtle">
+        <div className="flex">
           {tabs.map((tab) => {
-            const Icon = tab.icon;
             const active = activeTab === tab.id;
             return (
               <button
@@ -38,17 +36,16 @@ export function MissionBottomDock() {
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
                 className={cn(
-                  'flex flex-1 items-center justify-center gap-1.5 py-2.5 text-[11px] font-medium transition-colors',
-                  active ? 'border-b-2 border-ice text-ice' : 'text-text-muted',
+                  'flex flex-1 items-center justify-center py-4 font-mono text-[10px] tracking-[0.14em] uppercase transition-colors duration-500',
+                  active ? 'text-text-primary' : 'text-text-muted',
                 )}
               >
-                <Icon className="size-3.5" />
                 {tab.label}
               </button>
             );
           })}
         </div>
-        <div className="h-(--spacing-bottom-dock-mobile) p-3">
+        <div className="h-(--spacing-bottom-dock-mobile) px-6 py-4">
           {activeTab === 'timeline' && <MissionTimeline />}
           {activeTab === 'stats' && <MissionStatistics />}
           {activeTab === 'logs' && <MissionLogs />}
@@ -62,7 +59,7 @@ export function MissionBottomDock() {
       variants={fadeIn}
       initial="hidden"
       animate="visible"
-      className="grid h-(--spacing-bottom-dock) shrink-0 grid-cols-1 gap-3 border-t border-border-subtle glass p-3 lg:grid-cols-[1.2fr_1fr_1fr] lg:gap-4 lg:p-4"
+      className="grid h-(--spacing-bottom-dock) shrink-0 grid-cols-1 gap-8 border-t border-border-subtle px-8 py-6 lg:grid-cols-[1.2fr_1fr_1fr] lg:gap-12 lg:px-10"
     >
       <MissionTimeline />
       <MissionStatistics />

@@ -7,21 +7,21 @@ import { EASE_PREMIUM } from '@/utils/motion';
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    'bg-linear-to-r from-ice/90 to-mission/90 text-space-void border border-ice/30 shadow-[0_0_24px_rgb(103_216_255/0.2)] hover:from-ice hover:to-mission hover:shadow-[0_0_32px_rgb(103_216_255/0.35)]',
+    'bg-text-primary text-space-void hover:bg-white/90',
   secondary:
-    'bg-mission/15 text-text-primary border border-mission/25 hover:bg-mission/25 hover:border-mission/40',
+    'bg-white/6 text-text-primary hover:bg-white/10',
   ghost:
-    'bg-transparent text-text-secondary border border-transparent hover:text-text-primary hover:bg-white/5',
+    'bg-transparent text-text-secondary hover:text-text-primary',
   outline:
-    'bg-transparent text-text-primary border border-border-default hover:border-ice/40 hover:bg-ice/5',
+    'bg-transparent text-text-primary border border-border-default hover:border-border-strong hover:bg-white/3',
   danger:
-    'bg-danger/15 text-danger border border-danger/30 hover:bg-danger/25',
+    'bg-danger/10 text-danger hover:bg-danger/18',
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: 'h-8 px-3 text-xs gap-1.5 rounded-md',
-  md: 'h-10 px-4 text-sm gap-2 rounded-lg',
-  lg: 'h-12 px-6 text-base gap-2.5 rounded-xl',
+  sm: 'h-8 px-3 text-xs gap-1.5',
+  md: 'h-10 px-5 text-sm gap-2',
+  lg: 'h-12 px-7 text-[0.9375rem] gap-2.5 tracking-wide',
 };
 
 export interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
@@ -56,17 +56,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <motion.button
         ref={ref}
         className={cn(
-          'relative inline-flex items-center justify-center font-medium tracking-wide transition-colors duration-200',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice/50 focus-visible:ring-offset-2 focus-visible:ring-offset-space-void',
-          'disabled:pointer-events-none disabled:opacity-45',
+          'relative inline-flex items-center justify-center font-medium transition-colors duration-500',
+          'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-mission/50 focus-visible:ring-offset-2 focus-visible:ring-offset-space-void',
+          'disabled:pointer-events-none disabled:opacity-40',
           variantStyles[variant],
           sizeStyles[size],
           className,
         )}
         disabled={isDisabled}
-        whileHover={isDisabled ? undefined : (whileHover ?? { scale: 1.02 })}
-        whileTap={isDisabled ? undefined : (whileTap ?? { scale: 0.98 })}
-        transition={{ duration: 0.2, ease: EASE_PREMIUM }}
+        whileHover={isDisabled ? undefined : (whileHover ?? { opacity: 0.88 })}
+        whileTap={isDisabled ? undefined : (whileTap ?? { opacity: 0.75 })}
+        transition={{ duration: 0.5, ease: EASE_PREMIUM }}
         {...props}
       >
         {loading ? (

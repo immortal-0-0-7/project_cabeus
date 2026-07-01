@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { GlassPanel } from '@/components/common/GlassPanel';
 import { Badge } from '@/components/common/Badge';
 import { MISSION_ID } from '@/data/missionData';
 import {
@@ -32,88 +31,65 @@ export function SARUploadWorkspace() {
       variants={staggerContainer}
       initial="hidden"
       animate="visible"
-      className="flex h-full min-h-0 flex-col gap-4"
+      className="flex h-full min-h-0 flex-col"
     >
-      <motion.div variants={fadeUp}>
-        <div className="flex flex-wrap items-start justify-between gap-3">
-          <div>
-            <Badge color="mission" pulse={isBusy}>
-              SAR Ingestion
-            </Badge>
-            <h2 className="mt-2 font-display text-xl font-bold tracking-tight text-text-primary lg:text-2xl">
-              SAR Upload
-            </h2>
-            <p className="mt-0.5 text-sm text-text-secondary">
-              Chandrayaan-2 DFSAR dual-frequency imagery · Mission Control pipeline
-            </p>
-          </div>
-          <span className="font-mono text-[10px] text-text-muted">{MISSION_ID}</span>
-        </div>
+      <motion.div variants={fadeUp} className="mb-12">
+        <Badge color="mission" pulse={isBusy}>
+          SAR Ingestion
+        </Badge>
+        <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-semibold tracking-[-0.03em] text-text-primary">
+          SAR Upload
+        </h2>
+        <p className="mt-3 text-lg font-light text-text-secondary">
+          Chandrayaan-2 DFSAR dual-frequency imagery
+        </p>
+        <p className="text-label mt-2">{MISSION_ID}</p>
       </motion.div>
 
-      <motion.div variants={fadeUp}>
+      <motion.div variants={fadeUp} className="mb-10">
         <MissionTelemetry phase={phase} overallProgress={overallProgress} />
       </motion.div>
 
-      <motion.div variants={fadeUp}>
+      <motion.div variants={fadeUp} className="mb-10">
         <MissionReadyBanner visible={phase === 'complete'} onReset={reset} />
       </motion.div>
 
-      <div className="grid min-h-0 flex-1 gap-4 lg:grid-cols-2">
+      <div className="grid min-h-0 flex-1 gap-12 border-t border-border-subtle pt-10 lg:grid-cols-2 lg:gap-16">
         <motion.div variants={fadeUp} className="min-h-0">
-          <GlassPanel animate={false} className="flex h-full flex-col p-5">
-            <div className="mb-3 flex items-center justify-between">
-              <h3 className="font-mono text-[10px] font-medium uppercase tracking-widest text-text-muted">
-                Data Ingestion
-              </h3>
-              <span className="font-mono text-[9px] text-ice">CH-2 DFSAR PAYLOAD</span>
-            </div>
-
-            <DragDropZone
-              onDrop={handleDrop}
-              onFiles={handleFiles}
-              phase={phase}
-              uploadProgress={uploadProgress}
-              disabled={isBusy}
-            />
-
-            <FileQueue files={files} activeFileId={activeFileId} />
-          </GlassPanel>
+          <p className="text-label mb-6">Data Ingestion</p>
+          <DragDropZone
+            onDrop={handleDrop}
+            onFiles={handleFiles}
+            phase={phase}
+            uploadProgress={uploadProgress}
+            disabled={isBusy}
+          />
+          <FileQueue files={files} activeFileId={activeFileId} />
         </motion.div>
 
         <motion.div variants={fadeUp} className="min-h-0">
-          <GlassPanel
-            animate={false}
-            strong={phase === 'processing' || phase === 'complete'}
-            className="relative flex h-full flex-col overflow-hidden p-5"
-          >
-            <div className="pointer-events-none absolute inset-0 grid-mission opacity-30" />
+          <p className="text-label mb-6">Processing Pipeline</p>
 
-            {phase === 'idle' && (
-              <div className="relative flex flex-1 flex-col items-center justify-center text-center">
-                <div className="mb-4 flex size-14 items-center justify-center rounded-2xl border border-border-default bg-white/3">
-                  <span className="font-mono text-lg font-bold text-text-muted">—</span>
-                </div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-muted">
-                  Pipeline Standing By
-                </p>
-                <p className="mt-2 max-w-xs text-sm text-text-secondary">
-                  Upload a DFSAR swath to initiate the 7-stage mission control processing sequence
-                </p>
-              </div>
-            )}
+          {phase === 'idle' && (
+            <div className="flex flex-1 flex-col items-center justify-center py-20 text-center">
+              <p className="font-display text-4xl font-light text-text-muted">—</p>
+              <p className="text-label mt-6">Pipeline Standing By</p>
+              <p className="mt-4 max-w-xs text-sm font-light text-text-secondary">
+                Upload a DFSAR swath to initiate the 7-stage processing sequence
+              </p>
+            </div>
+          )}
 
-            {(phase === 'uploading' || phase === 'processing' || phase === 'complete') && (
-              <div className="relative min-h-0 flex-1">
-                <MissionControlSequence
-                  stages={stages}
-                  phase={phase}
-                  overallProgress={overallProgress}
-                  elapsedMs={elapsedMs}
-                />
-              </div>
-            )}
-          </GlassPanel>
+          {(phase === 'uploading' || phase === 'processing' || phase === 'complete') && (
+            <div className="min-h-0 flex-1">
+              <MissionControlSequence
+                stages={stages}
+                phase={phase}
+                overallProgress={overallProgress}
+                elapsedMs={elapsedMs}
+              />
+            </div>
+          )}
         </motion.div>
       </div>
     </motion.div>

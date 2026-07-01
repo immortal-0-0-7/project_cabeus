@@ -58,17 +58,17 @@ export const nebulaFragmentShader = /* glsl */ `
 
     float density = smoothstep(0.15, 0.95, nebulaA * 0.55 + nebulaB * 0.35 + nebulaC * 0.25);
 
-    vec3 deepSpace = vec3(0.008, 0.016, 0.04);
-    vec3 iceBlue = vec3(0.15, 0.55, 0.85);
-    vec3 missionBlue = vec3(0.12, 0.28, 0.72);
-    vec3 cinematic = vec3(0.28, 0.18, 0.62);
-    vec3 magenta = vec3(0.45, 0.12, 0.38);
+    vec3 deepSpace = vec3(0.0);
+    vec3 iceBlue = vec3(0.03, 0.08, 0.12);
+    vec3 missionBlue = vec3(0.02, 0.05, 0.1);
+    vec3 cinematic = vec3(0.05, 0.03, 0.08);
+    vec3 magenta = vec3(0.06, 0.02, 0.05);
 
     vec3 color = deepSpace;
-    color = mix(color, missionBlue, density * 0.35);
-    color = mix(color, iceBlue, pow(nebulaA, 2.2) * 0.28);
-    color = mix(color, cinematic, pow(nebulaB, 1.8) * 0.22);
-    color = mix(color, magenta, pow(nebulaC, 2.5) * 0.12);
+    color = mix(color, missionBlue, density * 0.08);
+    color = mix(color, iceBlue, pow(nebulaA, 2.2) * 0.05);
+    color = mix(color, cinematic, pow(nebulaB, 1.8) * 0.04);
+    color = mix(color, magenta, pow(nebulaC, 2.5) * 0.025);
 
     float vignette = 1.0 - length(uv * 0.55);
     color *= smoothstep(0.2, 1.0, vignette);

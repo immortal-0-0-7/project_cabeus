@@ -1,7 +1,4 @@
 import { motion } from 'framer-motion';
-import { Radio, Satellite, Target } from 'lucide-react';
-import { GlassPanel } from '@/components/common/GlassPanel';
-import { Badge } from '@/components/common/Badge';
 import { LunarWorkspaceMap } from '@/components/mission-control/LunarWorkspaceMap';
 import { AnimatedCounter } from '@/components/mission-control/AnimatedCounter';
 import {
@@ -21,63 +18,54 @@ export function OverviewWorkspace() {
       variants={staggerContainer}
       initial="hidden"
       animate="visible"
-      className="flex h-full min-h-0 flex-col gap-4"
+      className="flex h-full min-h-0 flex-col"
     >
-      <motion.div variants={fadeUp} className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <div className="mb-1 flex items-center gap-2">
-            <Badge color="signal" pulse>
-              Active Mission
-            </Badge>
-            <span className="font-mono text-[10px] text-text-muted">{MISSION_ID}</span>
-          </div>
-          <h2 className="font-display text-xl font-bold tracking-tight text-text-primary lg:text-2xl">
-            {MISSION_NAME}
-          </h2>
-          <p className="mt-0.5 text-sm text-text-secondary">
-            {ORBITER} · South polar SAR ice intelligence pipeline
-          </p>
-        </div>
+      <motion.div variants={fadeUp} className="mb-12">
+        <p className="text-label">{MISSION_ID}</p>
+        <h2 className="mt-4 font-display text-[clamp(2rem,5vw,3.5rem)] font-semibold tracking-[-0.04em] text-text-primary">
+          {MISSION_NAME}
+        </h2>
+        <p className="mt-3 text-lg font-light text-text-secondary">
+          {ORBITER} · South polar SAR ice intelligence
+        </p>
 
-        <div className="flex gap-2">
+        <div className="mt-10 flex flex-wrap gap-12 border-t border-border-subtle pt-10">
           {[
-            { icon: Satellite, label: 'Orbiter', value: 'Nominal', color: 'text-signal' },
-            { icon: Target, label: 'Primary Site', value: primary.name.split(' ')[0], color: 'text-ice' },
-            { icon: Radio, label: 'DSN Link', value: `${ROVER_TELEMETRY.signalStrength}%`, color: 'text-mission' },
-          ].map(({ icon: Icon, label, value, color }) => (
-            <GlassPanel key={label} animate={false} className="px-3 py-2">
-              <div className="flex items-center gap-2">
-                <Icon className={`size-3.5 ${color}`} />
-                <div>
-                  <p className="text-[9px] text-text-muted">{label}</p>
-                  <p className={`font-mono text-[11px] font-medium ${color}`}>{value}</p>
-                </div>
-              </div>
-            </GlassPanel>
+            { label: 'Orbiter', value: 'Nominal' },
+            { label: 'Primary Site', value: primary.name.split(' ')[0] },
+            { label: 'DSN Link', value: `${ROVER_TELEMETRY.signalStrength}%` },
+          ].map((item) => (
+            <div key={item.label}>
+              <p className="text-label">{item.label}</p>
+              <p className="mt-2 font-display text-xl font-medium text-text-primary">{item.value}</p>
+            </div>
           ))}
         </div>
       </motion.div>
 
       <motion.div variants={fadeUp} className="min-h-0 flex-1">
-        <GlassPanel animate={false} className="flex h-full min-h-[360px] flex-col p-4 lg:p-5">
+        <div className="flex h-full min-h-[400px] flex-col">
           <LunarWorkspaceMap />
-        </GlassPanel>
+        </div>
       </motion.div>
 
-      <motion.div variants={fadeUp} className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <motion.div
+        variants={fadeUp}
+        className="mt-12 grid grid-cols-2 gap-10 border-t border-border-subtle pt-10 lg:grid-cols-4"
+      >
         {[
           { label: 'Orbital Altitude', value: 100, unit: 'km' },
           { label: 'Swath Resolution', value: 12.4, unit: 'm/px' },
           { label: 'Penetration Depth', value: 5, unit: 'm' },
           { label: 'Mission Elapsed', value: 847, unit: 'min' },
         ].map((item) => (
-          <GlassPanel key={item.label} animate={false} className="p-3">
-            <p className="text-[10px] text-text-muted">{item.label}</p>
-            <p className="font-mono text-lg font-semibold text-text-primary">
+          <div key={item.label}>
+            <p className="text-label">{item.label}</p>
+            <p className="text-stat-massive mt-3 text-[clamp(2rem,4vw,3rem)] text-text-primary">
               <AnimatedCounter value={item.value} decimals={item.value % 1 ? 1 : 0} />
-              <span className="ml-1 text-xs font-normal text-text-muted">{item.unit}</span>
+              <span className="ml-2 text-base font-normal text-text-muted">{item.unit}</span>
             </p>
-          </GlassPanel>
+          </div>
         ))}
       </motion.div>
     </motion.div>

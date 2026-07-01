@@ -5,13 +5,13 @@ export function SceneEffects() {
   return (
     <EffectComposer multisampling={4}>
       <Bloom
-        intensity={1.35}
-        luminanceThreshold={0.18}
+        intensity={0.45}
+        luminanceThreshold={0.62}
         luminanceSmoothing={0.85}
         mipmapBlur
         radius={0.72}
       />
-      <Vignette eskil offset={0.18} darkness={0.65} blendFunction={BlendFunction.NORMAL} />
+      <Vignette eskil offset={0.18} darkness={0.82} blendFunction={BlendFunction.NORMAL} />
     </EffectComposer>
   );
 }

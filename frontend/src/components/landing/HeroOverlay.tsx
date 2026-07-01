@@ -19,7 +19,7 @@ export function HeroOverlay() {
   const pointerY = useMotionValue(0);
   const gradientX = useMotionTemplate`${pointerX}%`;
   const gradientY = useMotionTemplate`${pointerY}%`;
-  const spotlightBackground = useMotionTemplate`radial-gradient(900px circle at ${gradientX} ${gradientY}, rgb(103 216 255 / 0.14), transparent 42%), radial-gradient(700px circle at 80% 20%, rgb(110 93 255 / 0.1), transparent 50%)`;
+  const spotlightBackground = useMotionTemplate`radial-gradient(900px circle at ${gradientX} ${gradientY}, rgb(103 216 255 / 0.02), transparent 42%), radial-gradient(700px circle at 80% 20%, rgb(110 93 255 / 0.015), transparent 50%)`;
 
   useEffect(() => {
     const handleMove = (event: MouseEvent) => {
@@ -35,7 +35,7 @@ export function HeroOverlay() {
     <div className="pointer-events-none absolute inset-0 z-10 flex flex-col">
       <motion.div
         aria-hidden
-        className="absolute inset-0 opacity-70"
+        className="absolute inset-0 opacity-20"
         style={{ background: spotlightBackground }}
       />
 
